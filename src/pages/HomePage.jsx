@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router';
 import '../css/HomePage.css'
 
 function HomePage() {
+    const navigate = useNavigate()
+
   return (
     <div className="container my-5">
       <div className="hero-section">
@@ -11,16 +14,14 @@ function HomePage() {
           <div className="col-lg-8 hero-content">
 
             <h1 className="display-4 mb-4 fw-bold">
-              Experience the road
-              <br />
-              like never before
+              Every Journey Starts at MileZero. Start Yours Today
             </h1>
 
             <p className="lead mb-4 w-75">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui, quod alias nobis aliquid, laboriosam ex reprehenderit quasi harum repellat fugiat hic ab doloremque dolores possimus, aut velit praesentium officiis ullam!
             </p>
 
-            <button className="btn btn-warning text-white fw-semibold px-4 py-2 rounded-pill">
+            <button className="btn btn-warning text-white fw-semibold px-4 py-2 rounded-pill" onClick={() => navigate("/vehicles")}>
               View All Cars
             </button>
 
@@ -40,9 +41,9 @@ function HomePage() {
                 <div className="mb-3">
                   <select className="form-select rounded-2">
                     <option>Car Type</option>
-                    <option>Sedan</option>
+                    <option>Car</option>
                     <option>SUV</option>
-                    <option>Hatchback</option>
+                    <option>Pickup</option>
                   </select>
                 </div>
 
@@ -80,6 +81,7 @@ function HomePage() {
 
                 <button
                   className="btn btn-warning text-white rounded-pill w-100 fw-semibold py-2"
+                  onClick={() => navigate("/vehicles")}
                 >
                   Book Now
                 </button>

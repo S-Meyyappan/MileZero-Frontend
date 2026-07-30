@@ -14,7 +14,7 @@ function Navbar() {
             height="35"
             className="me-2 rounded-circle"
           />
-          RoadReady
+          MileZero
         </Link>
 
         {/* Mobile Toggle */}
