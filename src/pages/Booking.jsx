@@ -166,28 +166,28 @@ export default function Booking() {
                         </div>
                     ))}
                 </div>
-                    {/* Footer */}
-<div className="card shadow-sm mt-4">
-  <div className="card-body d-flex justify-content-between align-items-center">
+                {/* Footer */}
+                <div className="card shadow-sm mt-4">
+                    <div className="card-body d-flex justify-content-between align-items-center">
 
-    <div>
-      <h5 className="mb-0">
-        Total: <span className="text-primary">₹{v.price}</span>
-      </h5>
-      <small className="text-muted">
-        Includes vehicle rental and selected add-ons
-      </small>
-    </div>
+                        <div>
+                            <h5 className="mb-0">
+                                Total: <span className="text-primary">₹{v.price}</span>
+                            </h5>
+                            <small className="text-muted">
+                                Includes vehicle rental and selected add-ons
+                            </small>
+                        </div>
 
-    <button
-      className="btn btn-success px-4"
-    >
-      Confirm Booking
-    </button>
+                        <button
+                            className="btn btn-success px-4"
+                        >
+                            Confirm Booking
+                        </button>
 
-  </div>
-</div>
-                
+                    </div>
+                </div>
+
             </div>
         </div>
     );
