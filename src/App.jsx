@@ -8,15 +8,18 @@ import { Route, Routes } from 'react-router';
 import MainLayout from './pages/MainLayout';
 import Navbar from './components/Navbar';
 import PageNotFound from './pages/PageNotFound';
+import HomePage from './pages/HomePage';
 
 function App() {
 
   return (
     <>
-    <Routes>
-      <Route path = "/" element={<MainLayout/>}/>
-      <Route path = "*" element={<PageNotFound/>}/>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+            <Route path="/" element={<HomePage />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </>
   )
 }
