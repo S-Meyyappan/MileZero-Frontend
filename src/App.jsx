@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';
 import Vehicles from './pages/Vehicles';
+import VehicleDetails from './pages/VehicleDetails';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/vehicles" element={<Vehicles />} />
+            <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
