@@ -1,8 +1,9 @@
-import { useParams, Link } from "react-router"; // Fixed routing package
+import { useParams, Link, useNavigate } from "react-router"; // Fixed routing package
 import vehicles from "../data/Vehicle"; // Fixed named import format
 
 function VehicleDetails() {
     const { vehicleId } = useParams();
+    const navigate = useNavigate()
 
     // Find vehicle object inside local state array
     const vehicle = vehicles.find((v) => v.id === Number(vehicleId));
@@ -18,16 +19,6 @@ function VehicleDetails() {
         );
     }
 
-    // Fallback defaults if specific fields are missing from your JSON object
-    const specs = vehicle.specifications || {
-        transmission: "Automatic",
-        gearType: "6 Speed",
-        seats: "5",
-        luggage: "3 Bags",
-        fuel: "Petrol",
-        mileage: "18 km/l"
-    };
-
     const pricing = vehicle.pricing || [
         { duration: "Per Hour", cost: "120" },
         { duration: "Per Day", cost: "1100" },
@@ -38,8 +29,9 @@ function VehicleDetails() {
     return (
         <div className="container my-5">
             {/* Top Header Layer: Title and Rating Breadcrumb */}
-            <div className="mb-4">
+            <div className="mb-4 d-flex justify-content-between">
                 <h1 className="fw-bold display-6 mb-1">{vehicle.name}</h1>
+                <button className="btn btn-info py-2 rounded-start-pill" onClick={() => navigate(`/booking/${vehicleId}`)}>Go to Booking</button>
             </div>
 
             {/* Section 1: Carousel Showcase + Gallery Panel Grid */}
@@ -51,7 +43,7 @@ function VehicleDetails() {
                             <button type="button" data-bs-target="#vehicleImagesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#vehicleImagesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
-                        <div className="carousel-inner bg-light" style={{ height: "450px" }}>
+                        <div className="carousel-inner bg-light">
                             <div className="carousel-item active h-100">
                                 <img
                                     src="https://placehold.co/600x400"
@@ -85,8 +77,8 @@ function VehicleDetails() {
                 {/* Side Thumbnails Column */}
                 <div className="col-lg-3">
                     <div className="row g-2">
-                        {[1, 2, 3, 4, 5, 6, 7].map((imgIndex) => (
-                            <div className="col-6" key={imgIndex}>
+                        {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                            <div className="col-6" key={i}>
                                 <img
                                     src={"https://placehold.co/600x400"}
                                     className="img-fluid rounded border shadow-sm d-block w-100"
@@ -107,27 +99,31 @@ function VehicleDetails() {
                     <div className="row g-3">
                         <div className="col-6 col-md-4 col-lg-2">
                             <span className="text-muted small text-uppercase d-block">Transmission</span>
-                            <strong className="fs-5 text-dark">{specs.transmission}</strong>
+                            <strong className="fs-5 text-dark">{vehicle.transmission}</strong>
                         </div>
                         <div className="col-6 col-md-4 col-lg-2">
                             <span className="text-muted small text-uppercase d-block">Gear Type</span>
-                            <strong className="fs-5 text-dark">{specs.gearType}</strong>
+                            <strong className="fs-5 text-dark">{vehicle.gearType}</strong>
                         </div>
                         <div className="col-6 col-md-4 col-lg-2">
                             <span className="text-muted small text-uppercase d-block">Seats</span>
-                            <strong className="fs-5 text-dark">{specs.seats} Seater</strong>
+                            <strong className="fs-5 text-dark">{vehicle.seats} Seater</strong>
                         </div>
                         <div className="col-6 col-md-4 col-lg-2">
                             <span className="text-muted small text-uppercase d-block">Luggage Limit</span>
-                            <strong className="fs-5 text-dark">{specs.luggage}</strong>
+                            <strong className="fs-5 text-dark">{vehicle.luggage}</strong>
                         </div>
                         <div className="col-6 col-md-4 col-lg-2">
                             <span className="text-muted small text-uppercase d-block">Fuel Base</span>
-                            <strong className="fs-5 text-dark">{specs.fuel}</strong>
+                            <strong className="fs-5 text-dark">{vehicle.fuel}</strong>
                         </div>
                         <div className="col-6 col-md-4 col-lg-2">
                             <span className="text-muted small text-uppercase d-block">Tested Mileage</span>
-                            <strong className="fs-5 text-dark">{specs.mileage}</strong>
+                            <strong className="fs-5 text-dark">{vehicle.mileage}</strong>
+                        </div>
+                        <div className="col-6 col-md-4 col-lg-2">
+                            <span className="text-muted small text-uppercase d-block">Doors</span>
+                            <strong className="fs-5 text-dark">{vehicle.doors}</strong>
                         </div>
                     </div>
                 </div>

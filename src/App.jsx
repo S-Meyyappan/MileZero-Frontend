@@ -11,6 +11,7 @@ import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';
 import Vehicles from './pages/Vehicles';
 import VehicleDetails from './pages/VehicleDetails';
+import Booking from './pages/Booking';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/vehicles" element={<Vehicles />} />
             <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
         </Route>
+        <Route path="/booking/:vehicleId" element={<Booking />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
