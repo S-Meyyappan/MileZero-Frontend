@@ -9,6 +9,7 @@ import MainLayout from './pages/MainLayout';
 import Navbar from './components/Navbar';
 import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';
+import Vehicles from './pages/Vehicles';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/vehicles" element={<Vehicles />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
