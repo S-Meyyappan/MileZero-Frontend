@@ -40,15 +40,6 @@ function HomePage() {
 
                                 <div className="mb-3">
                                     <select className="form-select rounded-2">
-                                        <option>Car Type</option>
-                                        <option>Car</option>
-                                        <option>SUV</option>
-                                        <option>Pickup</option>
-                                    </select>
-                                </div>
-
-                                <div className="mb-3">
-                                    <select className="form-select rounded-2">
                                         <option>Pickup Location</option>
                                         <option>Delhi</option>
                                         <option>Mumbai</option>
