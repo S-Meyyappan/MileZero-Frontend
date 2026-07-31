@@ -13,6 +13,8 @@ import Vehicles from './pages/Vehicles';
 import VehicleDetails from './pages/VehicleDetails';
 import Booking from './pages/Booking';
 
+import './app.css'
+
 function App() {
 
   return (

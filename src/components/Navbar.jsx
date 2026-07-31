@@ -1,71 +1,165 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
+import { IconLogin2, IconUserPlus, IconCoinMoneroFilled } from "@tabler/icons-react";
+import "../css/Navbar.css";
 
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light shadow-sm py-3">
+        <header className="app-header">
+
             <div className="container">
 
-                {/* Logo */}
-                <Link className="navbar-brand d-flex align-items-center" to="/">
-                    <img
-                        src="src/assets/milezero-logo.png"
-                        alt="RoadReady"
-                        width="70"
-                        height="35"
-                        className="me-2 rounded-circle"
-                    />
-                    MileZero
-                </Link>
+                <nav className="app-navbar px-3">
 
-                {/* Mobile Toggle */}
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarlist"
-                    aria-controls="navbarlist"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+                    {/* Logo */}
 
-                {/* Links */}
-                <div className="collapse navbar-collapse" id="navbarlist">
-                    <ul className="navbar-nav mx-auto gap-lg-3">
-                        {/*Logo <-___________ Links __________-> Login : Auto margin on links x-axis eatsup  */}
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/">
-                                Home
-                            </Link>
-                        </li>
+                    <NavLink to="/" className="brand">
 
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/vehicles">
-                                Vehicles
-                            </Link>
-                        </li>
+                        <div className="brand-icon">
+                            <IconCoinMoneroFilled
+                                size={48}
+                                stroke={2}
+                                color="#2563EB"
+                            />
+                        </div>
 
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/about">
-                                About Us
-                            </Link>
-                        </li>
+                        <div>
 
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/contact">
-                                Contact Us
-                            </Link>
-                        </li>
-                    </ul>
+                            <div className="brand-title">
+                                MileZero
+                            </div>
 
-                    {/* Login */}
-                    <button className="btn btn-primary px-4 rounded-pill m-1">
-                        Login
+                        </div>
+
+                    </NavLink>
+
+                    {/* Navigation */}
+
+                    <div className="nav-pill">
+
+                        <NavLink
+                            to="/"
+                            end
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "nav-item active"
+                                    : "nav-item"
+                            }
+                        >
+                            Home
+                        </NavLink>
+
+                        <NavLink
+                            to="/vehicles"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "nav-item active"
+                                    : "nav-item"
+                            }
+                        >
+                            Vehicles
+                        </NavLink>
+
+                        <NavLink
+                            to="/about"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "nav-item active"
+                                    : "nav-item"
+                            }
+                        >
+                            About
+                        </NavLink>
+
+                        <NavLink
+                            to="/contact"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? "nav-item active"
+                                    : "nav-item"
+                            }
+                        >
+                            Contact
+                        </NavLink>
+
+                    </div>
+
+                    {/* Actions */}
+
+                    <div className="nav-actions">
+
+                        <button className="btn-login">
+
+                            <IconLogin2 size={18} />
+
+                            Login
+
+                        </button>
+
+                        <button className="btn-signup">
+
+                            <IconUserPlus size={18} />
+
+                            Sign Up
+
+                        </button>
+
+                    </div>
+
+                    {/* Mobile */}
+
+                    <button
+                        className="navbar-toggler d-lg-none border-0 shadow-none"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mobileNav"
+                    >
+                        ☰
                     </button>
+
+                </nav>
+
+                {/* Mobile Menu */}
+
+                <div
+                    className="collapse d-lg-none mt-3"
+                    id="mobileNav"
+                >
+
+                    <div className="mobile-menu">
+
+                        <NavLink to="/" className="mobile-link">
+                            Home
+                        </NavLink>
+
+                        <NavLink to="/vehicles" className="mobile-link">
+                            Vehicles
+                        </NavLink>
+
+                        <NavLink to="/about" className="mobile-link">
+                            About
+                        </NavLink>
+
+                        <NavLink to="/contact" className="mobile-link">
+                            Contact
+                        </NavLink>
+
+                        <hr />
+
+                        <button className="btn-login w-100 mb-2">
+                            Login
+                        </button>
+
+                        <button className="btn-signup w-100">
+                            Sign Up
+                        </button>
+
+                    </div>
+
                 </div>
+
             </div>
-        </nav>
+
+        </header>
     );
 }
 

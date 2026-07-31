@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import vehicles from "../data/Vehicle";
 import addons from "../data/Addons";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, Link } from "react-router";
+import Navbar from "../components/Navbar";
 
 export default function Booking() {
     const { vehicleId } = useParams();
@@ -27,7 +28,13 @@ export default function Booking() {
     const v = vehicles.find((v) => v.id === Number(vehicleId));
 
     if (!v) {
-        return <h2 className="text-center mt-5">Vehicle not found</h2>;
+        return (
+            <div className="container text-center my-5 py-5">
+                <h2 className="text-danger fw-bold">Vehicle Not Found</h2>
+                <p className="text-muted">The vehicle code you requested does not exist in our system inventory.</p>
+                <Link to="/vehicles" className="btn btn-primary mt-3">Back to Vehicles</Link>
+            </div>
+        );
     }
 
     // Vehicle price (convert string to number)
@@ -44,18 +51,33 @@ export default function Booking() {
 
     return (
         <div className="bg-light min-vh-100">
+            <Navbar/>
             {/* Search Form */}
             <div className="shadow-sm py-3 bg-warning-subtle">
                 <div className="container-fluid">
                     <div className="row g-2 align-items-end">
-                        <div className="col-lg-4">
+                        <div className="col-lg-2">
                             <label className="form-label">
                                 Pick-up Location
                             </label>
-                            <input
-                                className="form-control"
-                                placeholder="Chennai Airport"
-                            />
+                            <select className="form-select rounded-2">
+                                        <option>Pickup Location</option>
+                                        <option>Delhi</option>
+                                        <option>Mumbai</option>
+                                        <option>Bangalore</option>
+                                    </select>
+                        </div>
+
+                        <div className="col-lg-2">
+                            <label className="form-label">
+                                Drop Location
+                            </label>
+                            <select className="form-select rounded-2">
+                                        <option>Drop Location</option>
+                                        <option>Delhi</option>
+                                        <option>Mumbai</option>
+                                        <option>Bangalore</option>
+                                    </select>
                         </div>
 
                         <div className="col-lg-2">

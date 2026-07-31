@@ -1,0 +1,223 @@
+.vehicle-card{
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    padding:20px;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    height:100%;
+
+}
+
+.vehicle-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 16px 35px rgba(15,23,42,.08);
+
+}
+
+.vehicle-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.brand-badge{
+
+    background:#eef4ff;
+
+    color:var(--primary);
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+}
+
+.wishlist-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f8fafc;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#64748b;
+
+    transition:.25s;
+
+}
+
+.wishlist-btn:hover{
+
+    background:#fee2e2;
+
+    color:#ef4444;
+
+}
+
+.vehicle-image-wrapper{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:170px;
+
+}
+
+.vehicle-image{
+
+    max-width:100%;
+
+    max-height:150px;
+
+    object-fit:contain;
+
+    transition:.3s;
+
+}
+
+.vehicle-card:hover .vehicle-image{
+
+    transform:scale(1.05);
+
+}
+
+.vehicle-model{
+
+    font-family:var(--heading-font);
+
+    font-weight:700;
+
+    margin-bottom:4px;
+
+}
+
+.vehicle-type{
+
+    color:var(--text-light);
+
+    font-size:.9rem;
+
+    margin-bottom:18px;
+
+}
+
+.vehicle-specs{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+}
+
+.spec{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#475569;
+
+    font-size:.92rem;
+
+}
+
+.vehicle-footer{
+
+    margin-top:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    padding-top:22px;
+
+}
+
+.vehicle-price{
+
+    font-size:1.45rem;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+    line-height:1;
+
+}
+
+.price-day{
+
+    font-size:.82rem;
+
+    color:var(--text-light);
+
+}
+
+.details-btn{
+
+    border:none;
+
+    background:none;
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.details-btn:hover{
+
+    transform:translateX(4px);
+
+}
