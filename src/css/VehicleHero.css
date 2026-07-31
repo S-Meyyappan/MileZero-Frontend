@@ -1,0 +1,107 @@
+.vehicle-brand{
+
+    text-transform:uppercase;
+
+    letter-spacing:.18em;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.vehicle-meta{
+
+    display:flex;
+
+    gap:1.5rem;
+
+    flex-wrap:wrap;
+
+    color:var(--text-light);
+
+    font-size:.95rem;
+
+}
+
+.vehicle-meta span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.4rem;
+
+}
+
+.vehicle-image{
+
+    height:520px;
+
+    width:100%;
+
+    object-fit:cover;
+
+}
+
+.booking-summary{
+
+    top:110px;
+
+}
+
+.price-label{
+
+    font-size:.8rem;
+
+    color:var(--text-light);
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+}
+
+.vehicle-price{
+
+    font-family:var(--heading-font);
+
+    font-size:2.4rem;
+
+    font-weight:800;
+
+    margin-top:.4rem;
+
+}
+
+.vehicle-price span{
+
+    font-size:1rem;
+
+    color:var(--text-light);
+
+    font-family:var(--body-font);
+
+    font-weight:500;
+
+}
+
+.availability{
+
+    margin-top:1rem;
+
+    color:#16a34a;
+
+    font-weight:600;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    transition:.2s;
+
+}

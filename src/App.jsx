@@ -6,7 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Route, Routes } from 'react-router';
 
 import MainLayout from './pages/MainLayout';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navigate/Navbar';
 import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';
 import Vehicles from './pages/Vehicles';

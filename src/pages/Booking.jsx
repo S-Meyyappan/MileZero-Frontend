@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import vehicles from "../data/Vehicle";
 import addons from "../data/Addons";
 import { useNavigate, useParams, Link } from "react-router";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navigate/Navbar";
 
 export default function Booking() {
     const { vehicleId } = useParams();
