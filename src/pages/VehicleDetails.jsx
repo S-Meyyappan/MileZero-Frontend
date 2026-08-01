@@ -2,6 +2,8 @@ import VehicleHero from "../components/VehicleDetails/VehicleHero";
 import VehicleSpecs from "../components/VehicleDetails/VehicleSpecs";
 import VehicleCondition from "../components/VehicleDetails/VehicleCondition";
 import VehicleFeatures from "../components/VehicleDetails/VehicleFeatures";
+import FeaturedVehicles from "../components/Homepage/FeaturedVehicles";
+import featuredVehicles from "../data/VehicleJson";
 
 
 const Vehicle = () => {
@@ -71,6 +73,10 @@ const Vehicle = () => {
 
                 {/* Features */}
                 <VehicleFeatures features={vehicle.features} />
+
+                <FeaturedVehicles
+                    vehicles={featuredVehicles}
+                />
 
             </div>
 

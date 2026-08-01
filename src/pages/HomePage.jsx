@@ -16,7 +16,7 @@ import "../css/HomePage.css"
 import "../App.css"
 
 import WhyChoose from "../components/Homepage/WhyChoose";
-import FeaturedVehicles from "../components/Homepage/FeatureVehicles";
+import FeaturedVehicles from "../components/Homepage/FeaturedVehicles";
 
 import featuredVehicles from "../data/VehicleJson";
 

@@ -1,6 +1,7 @@
 const featuredVehicles = [
 
     {
+        id: 1,
         manufacturer: "Honda",
         model: "City",
         manufacturingYear: 2024,
@@ -15,6 +16,7 @@ const featuredVehicles = [
     },
 
     {
+        id: 2,
         manufacturer: "Toyota",
         model: "Innova Crysta",
         manufacturingYear: 2023,
@@ -29,6 +31,7 @@ const featuredVehicles = [
     },
 
     {
+        id: 3,
         manufacturer: "Toyota",
         model: "Fortuner",
         manufacturingYear: 2024,
