@@ -1,4 +1,4 @@
-function VehicleToolbar({ filters, setFilters }) {
+function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmission, seatCount }) {
 
     const updateFilter = (key, value) => {
 
@@ -25,10 +25,11 @@ function VehicleToolbar({ filters, setFilters }) {
                         }
                     >
                         <option value="">All Brands</option>
-                        <option>Toyota</option>
-                        <option>Honda</option>
-                        <option>Hyundai</option>
-                        <option>BMW</option>
+                        {
+                            brands.map((b,index) => (
+                                <option key={index} value={b}>{b}</option>
+                            ))
+                        }
                     </select>
                 </div>
 
@@ -43,9 +44,11 @@ function VehicleToolbar({ filters, setFilters }) {
                         }
                     >
                         <option value="">Fuel Type</option>
-                        <option>Petrol</option>
-                        <option>Diesel</option>
-                        <option>Electric</option>
+                        {
+                            fuelTypes.map((f,index) => (
+                                <option key={index} value={f}>{f}</option>
+                            ))
+                        }
                     </select>
                 </div>
 
@@ -64,9 +67,11 @@ function VehicleToolbar({ filters, setFilters }) {
                     >
 
                         <option value=""> Transmission </option>
-                        <option>Manual</option>
-                        <option>Automatic</option>
-                        <option>CVT</option>
+                        {
+                            transmission.map((t,index) => (
+                                <option key={index} value={t}>{t}</option>
+                            ))
+                        }
                     </select>
                 </div>
 
@@ -82,10 +87,11 @@ function VehicleToolbar({ filters, setFilters }) {
                     >
 
                         <option value="">Seats</option>
-                        <option>2</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>7</option>
+                        {
+                            seatCount?.map((s,index) => (
+                                <option key={index} value={s}>{s}</option>
+                            ))
+                        }
                     </select>
                 </div>
 
@@ -100,9 +106,9 @@ function VehicleToolbar({ filters, setFilters }) {
                         }
                     >
                         <option value="recommended">Recommended</option>
-                        <option value="priceLow">Price: Low to High</option>
-                        <option value="priceHigh">Price: High to Low</option>
-                        <option value="year"> Newest First</option>
+                        <option value="priceLowToHigh">Price: Low to High</option>
+                        <option value="priceHighToLow">Price: High to Low</option>
+                        <option value="yearHighToLow"> Newest First</option>
                     </select>
                 </div>
 

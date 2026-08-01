@@ -6,7 +6,9 @@ import {
     IconGasStation,
     IconBolt,
     IconSnowflake,
-    IconUsers
+    IconUsers,
+    IconCylinder,
+    IconSnowflakeOff
 } from "@tabler/icons-react";
 
 import { useNavigate } from "react-router";
@@ -32,7 +34,14 @@ function VehicleCard({
     const fuelIcon =
         vehicle.fuelType === "ELECTRIC"
             ? <IconBolt size={18} />
-            : <IconGasStation size={18} />;
+            : vehicle.fuelType === "CNG"
+                ? <IconCylinder size={18} />
+                : <IconGasStation size={18} />;
+
+    const withAcIcon = vehicle.withAc 
+            ? <IconSnowflake size={18} />
+            : <IconSnowflakeOff size={18} />
+
 
     return (
 
@@ -48,17 +57,17 @@ function VehicleCard({
                     {vehicle.manufacturer || vehicle.name}
                 </span>
 
-                <button className="wishlist-btn"onClick={(e) => e.stopPropagation()}>
+                <button className="wishlist-btn" onClick={(e) => e.stopPropagation()}>
                     {favourite
-                        ? <IconHeartFilled size={20}/>
-                        : <IconHeart size={20}/>
+                        ? <IconHeartFilled size={20} />
+                        : <IconHeart size={20} />
                     }
                 </button>
             </div>
 
             {/* Image */}
             <div className="vehicle-image-wrapper">
-                <img src="https://placehold.co/600x400" alt={vehicle.model} className="vehicle-image"/>
+                <img src="https://placehold.co/600x400" alt={vehicle.model} className="vehicle-image" />
             </div>
 
             {/* Details */}
@@ -83,14 +92,14 @@ function VehicleCard({
                     </div>
 
                     <div className="spec">
-                        <IconSnowflake size={18}/>
+                        {withAcIcon}
                         <span>
                             {vehicle.withAc ? "AC" : "No AC"}
                         </span>
 
                     </div>
                     <div className="spec">
-                        <IconUsers size={18}/>
+                        <IconUsers size={18} />
                         <span>
                             {vehicle.seatCount} Seats
                         </span>
@@ -102,7 +111,7 @@ function VehicleCard({
             <div className="vehicle-footer">
                 <div>
                     <div className="vehicle-price">
-                        ₹{pricePerDay}
+                        ₹{vehicle.category.basePricePerDay}
                     </div>
 
                     <div className="price-day">

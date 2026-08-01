@@ -1,3 +1,6 @@
+import { IconCar } from "@tabler/icons-react";
+import vehicleCategoriesIcons from "../../data/vehicleCategoriesIcons";
+
 function VehicleCategories({
     categories,
     selectedCategory,
@@ -10,9 +13,21 @@ function VehicleCategories({
 
             <div className="d-flex gap-2 overflow-auto pb-2 category-scroll">
 
+                {/* 1. Standalone "All Vehicles" Button */}
+                <button
+                    type="button"
+                    className={`btn rounded-pill d-flex align-items-center gap-2 px-4 py-2 category-btn ${
+                        selectedCategory === "All Vehicles" ? "btn-primary" : "btn-light"
+                    }`}
+                    onClick={() => setSelectedCategory("All Vehicles")}
+                >
+                    <IconCar size={18} />
+                    All Vehicles
+                </button>
+
                 {categories.map((category) => {
 
-                    const Icon = category.icon;
+                    const Icon = vehicleCategoriesIcons.find(c => c.name === category.name)?.icon;
 
                     const active =
                         selectedCategory === category.name;
