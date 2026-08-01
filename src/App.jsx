@@ -5,7 +5,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { Route, Routes } from 'react-router';
 
-import MainLayout from './pages/MainLayout';
+import MainLayout from './Layout/MainLayout';
+import DashboardLayout from './Layout/DashboardLayout';
 import Navbar from './components/Navigate/Navbar';
 import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';
@@ -20,13 +21,34 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/vehicles" element={<Vehicles />} />
-            <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
+
+        {/* Public */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/vehicles" element={<Vehicles />} />
+          <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
         </Route>
-        <Route path="/booking/:vehicleId" element={<Booking />} />
+
+        {/* Dashboard */}
+
+        {/* <Route element={<ProtectedRoute />}> */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            {/* <Route index element={<DashboardHome />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="favorites" element={<Favorites />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="vehicles" element={<Vehicles />} />
+            <Route path="employees" element={<Employees />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="branch" element={<Branch />} />
+            <Route path="settings" element={<BranchSettings />} />
+            <Route path="pricing" element={<Pricing />} />
+            <Route path="categories" element={<Categories />} /> */}
+          </Route>
+
         <Route path="*" element={<PageNotFound />} />
+
       </Routes>
     </>
   )

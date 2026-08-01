@@ -1,0 +1,123 @@
+/* ----------------------------------
+   Sidebar
+----------------------------------- */
+
+.sidebar {
+    width: 80px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    transition: width .25s ease;
+    overflow-x: hidden;
+    z-index: 1030;
+}
+
+.sidebar.expanded {
+    width: 240px;
+}
+
+/* ----------------------------------
+   Brand
+----------------------------------- */
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.brand-text,
+.sidebar-label {
+
+    opacity: 0;
+    white-space: nowrap;
+
+    transition:
+        opacity .15s ease,
+        transform .2s ease;
+
+    transform: translateX(-8px);
+
+    pointer-events: none;
+}
+
+.sidebar.expanded .brand-text,
+.sidebar.expanded .sidebar-label {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+    pointer-events: auto;
+
+}
+
+/* ----------------------------------
+   Navigation
+----------------------------------- */
+
+.sidebar .nav-link,
+.sidebar button {
+
+    color: var(--text-light);
+
+    transition:
+        background-color .2s,
+        color .2s;
+
+}
+
+.sidebar .nav-link:hover,
+.sidebar button:hover {
+
+    background: var(--bs-light);
+
+}
+
+.sidebar .nav-link.active {
+
+    background: var(--bs-primary-bg-subtle);
+
+    color: var(--bs-primary);
+
+    font-weight: 600;
+
+}
+
+/* ----------------------------------
+   Submenu
+----------------------------------- */
+
+.sidebar-submenu {
+
+    margin-left: 1.9rem;
+    padding-left: .9rem;
+
+    border-left: 1px solid var(--bs-border-color);
+
+}
+
+/* ----------------------------------
+   Scrollbar
+----------------------------------- */
+
+.sidebar::-webkit-scrollbar {
+
+    width: 4px;
+
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+
+    background: rgba(0,0,0,.15);
+    border-radius: 999px;
+
+}
