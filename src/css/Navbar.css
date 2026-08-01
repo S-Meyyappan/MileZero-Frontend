@@ -38,6 +38,14 @@
 
 }
 
+.brand-text {
+    color: #000000 !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+
 .heading-font{
 
     font-family:var(--heading-font);

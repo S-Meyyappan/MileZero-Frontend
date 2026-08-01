@@ -25,7 +25,7 @@ function Navbar() {
                 <nav className="navbar navbar-expand-lg navbar-shell px-3 px-lg-4">
 
                     {/* Brand */}
-                    <NavLink to="/" className="navbar-brand d-flex align-items-center gap-2 m-0">
+                    <NavLink to="/" className="navbar-brand d-flex align-items-center gap-3 m-0">
                         <div className="brand-icon">
                             <IconCoinMoneroFilled size={24} />
                         </div>
