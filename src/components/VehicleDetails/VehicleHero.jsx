@@ -11,7 +11,7 @@ import { useState } from "react";
 function VehicleHero({ vehicle }) {
 
     const transmissionIcon = () => {
-        if (vehicle.transmission === "MT" || vehicle.transmission === "MANUAL") {
+        if (vehicle?.transmission === "MT" || vehicle?.transmission === "MANUAL") {
             return <IconManualGearbox size={18} />;
         }
         return <IconAutomaticGearbox size={18} />;
@@ -28,12 +28,12 @@ function VehicleHero({ vehicle }) {
 
                 {/* Heading */}
                 <div className="mb-4">
-                    <div className="vehicle-brand">{vehicle.manufacturer}</div>
-                    <div className="display-lg">{vehicle.model} </div>
+                    <div className="vehicle-brand">{vehicle?.manufacturer}</div>
+                    <div className="display-lg">{vehicle?.model} </div>
                     <div className="vehicle-meta mt-2">
-                        <span><IconCalendar size={17} />{vehicle.manufacturingYear}</span>
-                        <span><IconGasStation size={17} />{vehicle.fuelType}</span>
-                        <span>{transmissionIcon()}{vehicle.transmission}</span>
+                        <span><IconCalendar size={17} />{vehicle?.manufacturingYear}</span>
+                        <span><IconGasStation size={17} />{vehicle?.fuelType}</span>
+                        <span>{transmissionIcon()}{vehicle?.transmission}</span>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@ function VehicleHero({ vehicle }) {
                                     <img
                                         src={selectedImage}
                                         className="img-fluid vehicle-main-image"
-                                        alt={vehicle.model}
+                                        alt={vehicle?.model}
                                     />
                                 </div>
                             </div>
@@ -88,7 +88,7 @@ function VehicleHero({ vehicle }) {
                         <div className="card border-0 shadow-sm rounded-4 sticky-top booking-summary">
                             <div className="card-body">
                                 <div className="price-label">Starting From</div>
-                                <div className="vehicle-price">₹1,799 <span>/day</span></div>
+                                <div className="vehicle-price">₹{vehicle?.category.basePricePerDay} <span>/day</span></div>
                                 <div className="availability">Available</div>
                                 <button className="btn btn-warning w-100 mt-4">Continue Booking</button>
                             </div>

@@ -51,7 +51,7 @@ function VehicleFeatures({ features }) {
             </div>
 
             <div className="row g-4">
-                {
+                { groupedFeatures &&
                     Object.entries(groupedFeatures).map(([group, items]) => {
                         const Icon = getIcon(group);
                         return (

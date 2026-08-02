@@ -16,8 +16,8 @@ function VehicleSpecs({ vehicle }) {
 
     const transmissionIcon =
 
-        vehicle.transmission === "MT" ||
-        vehicle.transmission === "MANUAL"
+        vehicle?.transmission === "MT" ||
+        vehicle?.transmission === "MANUAL"
 
             ? IconManualGearbox
             : IconAutomaticGearbox;
@@ -30,17 +30,17 @@ function VehicleSpecs({ vehicle }) {
 
             <div className="row g-4">
 
-                <SpecItem icon={IconGasStation} label="Fuel"value={vehicle.fuelType} />
+                <SpecItem icon={IconGasStation} label="Fuel"value={vehicle?.fuelType} />
 
-                <SpecItem icon={transmissionIcon} label="Transmission" value={vehicle.transmission} />
+                <SpecItem icon={transmissionIcon} label="Transmission" value={vehicle?.transmission} />
 
-                <SpecItem icon={IconSteeringWheel} label="Drive" value={vehicle.driveType} />
+                <SpecItem icon={IconSteeringWheel} label="Drive" value={vehicle?.driveType} />
 
-                <SpecItem icon={IconUsers} label="Seats" value={`${vehicle.seatCount} Seats`} />
+                <SpecItem icon={IconUsers} label="Seats" value={`${vehicle?.seatCount} Seats`} />
 
-                <SpecItem icon={IconBriefcase} label="Luggage" value={`${vehicle.luggageCapacity} L`}/>
+                <SpecItem icon={IconBriefcase} label="Luggage" value={`${vehicle?.luggageCapacity} L`}/>
 
-                <SpecItem icon={IconSnowflake}label="Air Conditioning" value={ vehicle.withAc ? "Included": "Unavailable"}/>
+                <SpecItem icon={IconSnowflake}label="Air Conditioning" value={ vehicle?.withAc ? "Included": "Unavailable"}/>
 
             </div>
 

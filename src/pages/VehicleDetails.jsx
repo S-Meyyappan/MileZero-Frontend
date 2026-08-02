@@ -4,54 +4,30 @@ import VehicleCondition from "../components/VehicleDetails/VehicleCondition";
 import VehicleFeatures from "../components/VehicleDetails/VehicleFeatures";
 import FeaturedVehicles from "../components/Homepage/FeaturedVehicles";
 import featuredVehicles from "../data/VehicleJson";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router";
+import CategoryPricing from "../components/VehicleDetails/CategoryPricing";
 
 
 const Vehicle = () => {
 
-    // Temporary data
-    // Later this comes from API using vehicleId
-    const vehicle = {
-        "manufacturer": "Honda",
-        "model": "City",
-        "manufacturingYear": 2024,
-        "fuelType": "PETROL",
-        "transmission": "CVT",
-        "driveType": "AWD",
-        "withAc": true,
-        "seatCount": 5,
-        "luggageCapacity": 400,
-        "currentOdometer": 11140,
-        "features": [
-            {
-                "id": 1,
-                "name": "Adaptive Cruise Control",
-                "featureGroup": "SAFETY",
-                "description": "Automatically adjusts the vehicle speed to maintain a safe distance from vehicles ahead.",
-                "isActive": true
-            },
-            {
-                "id": 3,
-                "name": "Blind Spot Monitoring",
-                "featureGroup": "TECHNOLOGY",
-                "description": "Alerts the driver when vehicles are detected in adjacent lanes.",
-                "isActive": true
-            },
-            {
-                "id": 7,
-                "name": "Heads-up Display",
-                "featureGroup": "COMFORT",
-                "description": "Displays speed and navigation details directly onto the windshield.",
-                "isActive": true
-            },
-            {
-                "id": 8,
-                "name": "Autonomous Emergency Braking",
-                "featureGroup": "SAFETY",
-                "description": "Automatically applies brakes to prevent low-speed collisions.",
-                "isActive": true
+    const { vehicleId }= useParams()
+    const [vehicle, setVehicle] = useState(null)
+
+   useEffect(()=>{
+        const getVehicle = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/vehicle/get/${vehicleId}`)
+                setVehicle(response.data)
+                console.log("useEffecct" ,response?.data)
+            } catch (error) {
+                console.log(error)
             }
-        ]
-    }
+        }
+
+        getVehicle()
+   }, [])
 
 
     return (
@@ -72,7 +48,10 @@ const Vehicle = () => {
 
 
                 {/* Features */}
-                <VehicleFeatures features={vehicle.features} />
+                <VehicleFeatures features={vehicle?.features} />
+
+                {/* Category Pricing */}
+                <CategoryPricing category={vehicle?.category} />
 
                 <FeaturedVehicles
                     vehicles={featuredVehicles}

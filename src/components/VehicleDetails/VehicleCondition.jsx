@@ -23,7 +23,7 @@ function VehicleCondition({ vehicle }) {
                         <div className="card-body">
                             <IconCalendar size={28}className="text-primary mb-3"/>
                             <div className="small text-secondary">Manufacturing Year</div>
-                            <div className="fw-semibold mt-1">{vehicle.manufacturingYear}</div>
+                            <div className="fw-semibold mt-1">{vehicle?.manufacturingYear}</div>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ function VehicleCondition({ vehicle }) {
                         <div className="card-body">
                             <IconDashboard size={28}className="text-primary mb-3"/>
                             <div className="small text-secondary">Current Odometer</div>
-                            <div className="fw-semibold mt-1">{vehicle.currentOdometer} km</div>
+                            <div className="fw-semibold mt-1">{vehicle?.currentOdometer} km</div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ function VehicleCondition({ vehicle }) {
                         <div className="card-body">
                             <IconSnowflake size={28} className="text-primary mb-3"/>
                             <div className="small text-secondary">Air Conditioning</div>
-                            <div className="fw-semibold mt-1">{vehicle.withAc ? "Available" : "Not Available"}</div>
+                            <div className="fw-semibold mt-1">{vehicle?.withAc ? "Available" : "Not Available"}</div>
                         </div>
                     </div>
                 </div>
