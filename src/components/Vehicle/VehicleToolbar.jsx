@@ -105,10 +105,10 @@ function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmission, 
                             updateFilter("sort", e.target.value)
                         }
                     >
-                        <option value="recommended">Recommended</option>
-                        <option value="priceLowToHigh">Price: Low to High</option>
-                        <option value="priceHighToLow">Price: High to Low</option>
-                        <option value="yearHighToLow"> Newest First</option>
+                        <option value="DEFAULT">Recommended</option>
+                        <option value="PRICE_LOW_TO_HIGH">Price: Low to High</option>
+                        <option value="PRICE_HIGH_TO_LOW">Price: High to Low</option>
+                        <option value="YEAR_HIGH_TO_LOW"> Newest First</option>
                     </select>
                 </div>
 

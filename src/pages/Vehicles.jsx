@@ -25,77 +25,39 @@ function Vehicles() {
     const [selectedCategory, setSelectedCategory] = useState("All Vehicles");
 
     const [filters, setFilters] = useState({
-
         brand: "",
-
         fuel: "",
-
         transmission: "",
-
         seats: "",
-
-        sort: "recommended"
-
+        sort: "DEFAULT"
     });
 
-    const filteredVehicles = useMemo(() => {
+    const queryParams = {
+        page: page,
+        size: 6,
+        filterSort: filters.sort,
+        // If search is empty, pass undefined so Axios skips it
+        search: search === "" ? undefined : search,
+        brand: filters.brand === "" ? undefined : filters.brand,
+        fuelType: filters.fuel === "" ? undefined : filters.fuel,
+        transmission: filters.transmission === "" ? undefined : filters.transmission,
+        seats: filters.seats === "" ? undefined : filters.seats,
+        category: selectedCategory === "All Vehicles" || selectedCategory === "" ? undefined : selectedCategory
 
-        let result = [...vehicles];
+    }
 
-        if (selectedCategory !== "All Vehicles") {
-            result = result.filter(
-                vehicle => vehicle?.category.name === selectedCategory
-            );
+    // Get Categories
+    useEffect(() => {
+        const getAllCategories = async () => {
+
+            const response = await axios.get(`http://localhost:8080/api/category/get-all`)
+            setVehicleCategories(response.data)
         }
 
-        if (filters.brand !== "") {
-            result = result.filter(
-                vehicle => vehicle?.manufacturer === filters.brand
-            );
-        }
+        getAllCategories()
+    }, [])
 
-        if (filters.fuel !== "") {
-            result = result.filter(
-                vehicle => vehicle?.fuelType === filters.fuel
-            );
-        }
-
-        if (filters.transmission !== "") {
-            result = result.filter(
-                vehicle => vehicle?.transmission === filters.transmission
-            );
-        }
-
-        if (filters.seats !== "") {
-            result = result.filter(
-                vehicle => vehicle?.seatCount == filters.seats
-            );
-        }
-
-        if (search.trim()) {
-            result = result.filter(vehicle =>
-                `${vehicle.manufacturer} ${vehicle.model}`
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-            );
-        }
-
-        if (filters.sort === "priceLowToHigh") {
-            result = result.sort((a, b) => a.category.basePricePerDay - b.category.basePricePerDay)
-        }
-
-        if (filters.sort === "priceHighToLow") {
-            result = result.sort((a, b) => b.category.basePricePerDay - a.category.basePricePerDay)
-        }
-
-        if (filters.sort === "yearLowToHigh") {
-            result = result.sort((a, b) => b.manufacturingYear - a.manufacturingYear)
-        }
-
-        return result;
-
-    }, [search, selectedCategory, filters, vehicles]);
-
+    // Get Vehicles
     useEffect(() => {
         const getAvailableVehicles = async () => {
             const body = {
@@ -105,7 +67,7 @@ function Vehicles() {
             }
 
             try {
-                const response = await axios.post(`http://localhost:8080/api/availability/all-available-vehicles?page=${page}&size=6`, body)
+                const response = await axios.post(`http://localhost:8080/api/availability/fleet`, body, {params : queryParams})
                 setPageData(response.data)
                 setVehicles(response.data.content)
             }
@@ -114,18 +76,8 @@ function Vehicles() {
             }
         }
 
-        const getAllCategories = async () => {
-
-            const response = await axios.get(`http://localhost:8080/api/category/get-all`)
-            setVehicleCategories(response.data)
-        }
-
         getAvailableVehicles()
-        getAllCategories()
-
-        console.log(vehicles)
-        console.log(vehicleCategories)
-    }, [page])
+    }, [page, search, selectedCategory, filters])
 
     return (
 
@@ -169,7 +121,7 @@ function Vehicles() {
 
             <VehicleGrid
 
-                vehicles={filteredVehicles}
+                vehicles={vehicles}
 
             />
 
@@ -177,7 +129,7 @@ function Vehicles() {
                 currentPage={page}
                 pageData={pageData}
                 onPageChange={setPage}
-             />
+            />
 
         </div>
 
