@@ -1,14 +1,8 @@
 function VehiclePagination({
     currentPage,
-    totalPages,
+    pageData,
     onPageChange
 }) {
-
-    if (totalPages <= 1) {
-
-        return null;
-
-    }
 
     return (
 
@@ -16,15 +10,22 @@ function VehiclePagination({
 
             <ul className="pagination justify-content-center">
 
+                {/* First */}
+                <li className={`page-item ${ pageData?.first ? "disabled" : "" }`}>
+                    <button className="page-link" onClick={() => onPageChange(0)}>
+                        &laquo;
+                    </button>
+                </li>
+
                 {/* Previous */}
-                <li className={`page-item ${ currentPage === 0 ? "disabled" : "" }`}>
+                <li className={`page-item ${ pageData?.first ? "disabled" : "" }`}>
                     <button className="page-link" onClick={() => onPageChange(currentPage - 1)}>
-                        Previous
+                        &lsaquo;
                     </button>
                 </li>
 
                 {/* Pages */}
-                {[...Array(totalPages)].map((_, index) => (
+                {[...Array(pageData?.totalPages)].map((_, index) => (
                     <li key={index} className={`page-item ${ currentPage === index ? "active" : "" }`}>
                         <button className="page-link" onClick={() => onPageChange(index)}>
                             {index + 1}
@@ -33,9 +34,16 @@ function VehiclePagination({
                 ))}
 
                 {/* Next */}
-                <li className={`page-item ${ currentPage === totalPages - 1 ? "disabled": "" }`}>
+                <li className={`page-item ${ pageData?.last ? "disabled": "" }`}>
                     <button className="page-link" onClick={() => onPageChange(currentPage + 1)} >
-                        Next
+                        &rsaquo;
+                    </button>
+                </li>
+
+                {/* Last Page */}
+                <li className={`page-item ${ pageData?.last ? "disabled": "" }`}>
+                    <button className="page-link" onClick={() => onPageChange(totalPages-1)} >
+                        &raquo;
                     </button>
                 </li>
 

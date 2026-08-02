@@ -14,6 +14,10 @@ function Vehicles() {
 
     const [search, setSearch] = useState("");
 
+    const [page, setPage] = useState(0)
+
+    const [pageData, setPageData] = useState(null)
+
     const [vehicles, setVehicles] = useState([])
 
     const [vehicleCategories, setVehicleCategories] = useState([])
@@ -76,16 +80,16 @@ function Vehicles() {
             );
         }
 
-        if(filters.sort === "priceLowToHigh"){
-            result = result.sort((a,b) => a.category.basePricePerDay - b.category.basePricePerDay)
+        if (filters.sort === "priceLowToHigh") {
+            result = result.sort((a, b) => a.category.basePricePerDay - b.category.basePricePerDay)
         }
 
-        if(filters.sort === "priceHighToLow"){
-            result = result.sort((a,b) => b.category.basePricePerDay - a.category.basePricePerDay)
+        if (filters.sort === "priceHighToLow") {
+            result = result.sort((a, b) => b.category.basePricePerDay - a.category.basePricePerDay)
         }
 
-        if(filters.sort === "yearLowToHigh"){
-            result = result.sort((a,b) => b.manufacturingYear - a.manufacturingYear)
+        if (filters.sort === "yearLowToHigh") {
+            result = result.sort((a, b) => b.manufacturingYear - a.manufacturingYear)
         }
 
         return result;
@@ -100,8 +104,14 @@ function Vehicles() {
                 "branchId": 1
             }
 
-            const response = await axios.post(`http://localhost:8080/api/availability/all-available-vehicles`,body)
-            setVehicles(response.data)
+            try {
+                const response = await axios.post(`http://localhost:8080/api/availability/all-available-vehicles?page=${page}&size=6`, body)
+                setPageData(response.data)
+                setVehicles(response.data.content)
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
 
         const getAllCategories = async () => {
@@ -115,7 +125,7 @@ function Vehicles() {
 
         console.log(vehicles)
         console.log(vehicleCategories)
-    }, [])
+    }, [page])
 
     return (
 
@@ -127,7 +137,7 @@ function Vehicles() {
 
                 setSearch={setSearch}
 
-                count={filteredVehicles.length}
+                count={pageData?.totalElements}
 
             />
 
@@ -163,7 +173,11 @@ function Vehicles() {
 
             />
 
-            <VehiclePagination />
+            <VehiclePagination
+                currentPage={page}
+                pageData={pageData}
+                onPageChange={setPage}
+             />
 
         </div>
 
