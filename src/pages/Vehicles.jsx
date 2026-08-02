@@ -5,7 +5,6 @@ import VehicleCategories from "../components/Vehicle/VehicleCategories";
 import VehicleToolbar from "../components/Vehicle/VehicleToolbar";
 import VehicleGrid from "../components/Vehicle/VehicleGrid";
 import VehiclePagination from "../components/Vehicle/VehiclePagination";
-import vehicles from "../data/Vehicle";
 
 import "../css/Vehicle.css"
 import axios from "axios";
@@ -21,6 +20,14 @@ function Vehicles() {
     const [vehicles, setVehicles] = useState([])
 
     const [vehicleCategories, setVehicleCategories] = useState([])
+
+    const [brands, setBrands] = useState([])
+
+    const [seats, setSeats] = useState([])
+
+    const [fuelTypes, setFuelTypes] = useState([])
+
+    const [transmissions, setTransmissions] = useState([])
 
     const [selectedCategory, setSelectedCategory] = useState("All Vehicles");
 
@@ -54,7 +61,35 @@ function Vehicles() {
             setVehicleCategories(response.data)
         }
 
+        const getAllBrands = async () => {
+
+            const response = await axios.get(`http://localhost:8080/api/vehicle/get-all-brands`)
+            setBrands(response.data)
+        }
+
+        const getAllSeats = async () => {
+
+            const response = await axios.get(`http://localhost:8080/api/vehicle/get-all-seats`)
+            setSeats(response.data)
+        }
+
+        const getAllFuelTypes = async () => {
+
+            const response = await axios.get(`http://localhost:8080/api/vehicle/get-all-fuel-types`)
+            setFuelTypes(response.data)
+        }
+
+        const getAllTransmissions = async () => {
+
+            const response = await axios.get(`http://localhost:8080/api/vehicle/get-all-transmissions`)
+            setTransmissions(response.data)
+        }
+
         getAllCategories()
+        getAllBrands()
+        getAllFuelTypes()
+        getAllTransmissions()
+        getAllSeats()
     }, [])
 
     // Get Vehicles
@@ -109,13 +144,13 @@ function Vehicles() {
 
                 setFilters={setFilters}
 
-                brands={[...new Set(vehicles?.map(v => v.manufacturer).sort())]}
+                brands={brands}
 
-                fuelTypes={[...new Set(vehicles?.map(v => v.fuelType).sort())]}
+                fuelTypes={fuelTypes}
 
-                transmission={[...new Set(vehicles?.map(v => v.transmission).sort())]}
+                transmissions={transmissions}
 
-                seatCount={[...new Set(vehicles?.map(v => v.seatCount).sort())]}
+                seatCount={seats}
 
             />
 

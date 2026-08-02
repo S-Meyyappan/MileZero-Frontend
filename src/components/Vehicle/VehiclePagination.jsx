@@ -42,7 +42,7 @@ function VehiclePagination({
 
                 {/* Last Page */}
                 <li className={`page-item ${ pageData?.last ? "disabled": "" }`}>
-                    <button className="page-link" onClick={() => onPageChange(totalPages-1)} >
+                    <button className="page-link" onClick={() => onPageChange(pageData.totalPages-1)} >
                         &raquo;
                     </button>
                 </li>

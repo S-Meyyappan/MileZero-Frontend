@@ -1,4 +1,4 @@
-function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmission, seatCount }) {
+function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmissions, seatCount }) {
 
     const updateFilter = (key, value) => {
 
@@ -68,7 +68,7 @@ function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmission, 
 
                         <option value=""> Transmission </option>
                         {
-                            transmission.map((t,index) => (
+                            transmissions.map((t,index) => (
                                 <option key={index} value={t}>{t}</option>
                             ))
                         }
