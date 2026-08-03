@@ -76,7 +76,7 @@ function BookingSearchBar() {
 
         // TODO:
         // Redux + Backend later
-        if (form.pickupBranch === 0 || form.dropBranch === 0 || !pickupDate || !returnDate) {
+        if (form.pickupBranch === 0 || form.dropBranch === 0 || form.pickupDate === null || form.returnDate === null) {
             setError(true)
             setShowAlert(true)
         }

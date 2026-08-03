@@ -8,6 +8,7 @@ import VehiclePagination from "../components/Vehicle/VehiclePagination";
 
 import "../css/Vehicle.css"
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 function Vehicles() {
 
@@ -92,13 +93,17 @@ function Vehicles() {
         getAllSeats()
     }, [])
 
+    const dispatch = useDispatch()
+
+    const form = useSelector((state) => state.search.form)
+
     // Get Vehicles
     useEffect(() => {
         const getAvailableVehicles = async () => {
             const body = {
-                "chosenPickup": "2026-08-13T10:00:00",
-                "chosenReturn": "2026-08-14T10:00:00",
-                "branchId": 1
+                "chosenPickup": new Date(form.pickupDate).toISOString(),
+                "chosenReturn": new Date(form.returnDate).toISOString(),
+                "branchId": form.pickupBranch
             }
 
             try {
@@ -112,7 +117,7 @@ function Vehicles() {
         }
 
         getAvailableVehicles()
-    }, [page, search, selectedCategory, filters])
+    }, [page, search, selectedCategory, filters, form])
 
     return (
 
