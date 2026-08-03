@@ -5,8 +5,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { Route, Routes } from 'react-router';
 
-import MainLayout from './Layout/MainLayout';
-import DashboardLayout from './Layout/DashboardLayout';
+import MainLayout from './layout/MainLayout';
+import DashboardLayout from './layout/DashboardLayout';
 import Navbar from './components/Navigate/Navbar';
 import PageNotFound from './pages/PageNotFound';
 import HomePage from './pages/HomePage';

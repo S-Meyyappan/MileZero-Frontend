@@ -16,8 +16,12 @@ import {
 
 import "../css/BookingSearchBar.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setPickupBranch, setDropBranch, setPickupDate, setReturnDate } from "../store/actions/BookingSearchActions";
 
 function BookingSearchBar() {
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate();
 
@@ -25,19 +29,27 @@ function BookingSearchBar() {
 
     const [pickupSearch, setPickupSearch] = useState("");
     const [showPickup, setShowPickup] = useState(false);
-    const [selectedPickup, setSelectedPickup] = useState(null);
-    const [pickupBranch, setPickupBranch] = useState(null);
 
     const [dropSearch, setDropSearch] = useState("");
     const [showDrop, setShowDrop] = useState(false);
-    const [selectedDrop, setSelectedDrop] = useState(null);
-    const [dropBranch, setDropBranch] = useState(null);
 
-    const [pickupDate, setPickupDate] = useState(new Date());
+    const form = useSelector((state) => state.search.form)
 
-    const [returnDate, setReturnDate] = useState(
-        new Date(Date.now() + 24 * 60 * 60 * 1000)
-    );
+    const changePickupBranch = (branchId) =>{
+        dispatch(setPickupBranch(branchId))
+    }
+
+    const changeDropBranch = (branchId) =>{
+        dispatch(setDropBranch(branchId))
+    }
+
+    const changePickupDate = (date) =>{
+        dispatch(setPickupDate(new Date(date)))
+    }
+
+    const changeReturnDate = (date) =>{
+        dispatch(setReturnDate(new Date(date)))
+    }
 
     const [error, setError] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
@@ -64,7 +76,7 @@ function BookingSearchBar() {
 
         // TODO:
         // Redux + Backend later
-        if (!pickupBranch || !dropBranch || !pickupDate || !returnDate) {
+        if (form.pickupBranch === 0 || form.dropBranch === 0 || !pickupDate || !returnDate) {
             setError(true)
             setShowAlert(true)
         }
@@ -134,7 +146,7 @@ function BookingSearchBar() {
                                                 filteredPickup.map(branch => (
                                                     <button key={branch.id} type="button" className="dropdown-item"
                                                         onClick={() => {
-                                                            setPickupBranch(branch);
+                                                            changePickupBranch(branch.id);
                                                             setPickupSearch(branch.name);
                                                             setShowPickup(false);
                                                         }}
@@ -180,7 +192,7 @@ function BookingSearchBar() {
                                                 filteredDrop.map(branch => (
                                                     <button key={branch.id} type="button" className="dropdown-item"
                                                         onClick={() => {
-                                                            setDropBranch(branch);
+                                                            changeDropBranch(branch.id);
                                                             setDropSearch(branch.name);
                                                             setShowDrop(false);
                                                         }}
@@ -210,9 +222,9 @@ function BookingSearchBar() {
                                 <div className="booking-input">
                                     <IconCalendarEvent size={18} />
                                     <Flatpickr
-                                        value={pickupDate}
+                                        value={new Date(form.pickupDate)}
                                         onChange={([date]) =>
-                                            setPickupDate(date)
+                                            changePickupDate(date)
                                         }
                                         options={{
                                             enableTime: true,
@@ -233,13 +245,13 @@ function BookingSearchBar() {
 
                                     <IconCalendarEvent size={18} />
                                     <Flatpickr
-                                        value={returnDate}
+                                        value={new Date(form.returnDate)}
                                         onChange={([date]) =>
-                                            setReturnDate(date)
+                                            changeReturnDate(date)
                                         }
                                         options={{
                                             enableTime: true,
-                                            minDate: pickupDate,
+                                            minDate: form.pickupDate,
                                             minuteIncrement: 30,
                                             dateFormat: "d M Y h:i K"
                                         }}
