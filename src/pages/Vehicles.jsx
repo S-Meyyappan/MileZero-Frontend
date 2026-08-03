@@ -103,7 +103,7 @@ function Vehicles() {
             const body = {
                 "chosenPickup": new Date(form.pickupDate).toISOString(),
                 "chosenReturn": new Date(form.returnDate).toISOString(),
-                "branchId": form.pickupBranch
+                "branchId": form.pickupBranch.id
             }
 
             try {

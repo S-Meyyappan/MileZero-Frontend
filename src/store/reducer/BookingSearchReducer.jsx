@@ -1,8 +1,8 @@
 
 const initialState = {
     form: {
-        pickupBranch: 0,
-        dropBranch: 0,
+        pickupBranch: null,
+        dropBranch: null,
         pickupDate: Date.now(), // Simple number storing in milliseconds
         returnDate: Date.now() + 24 * 60 * 60 * 1000 
     }

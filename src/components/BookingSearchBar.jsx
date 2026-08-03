@@ -35,12 +35,12 @@ function BookingSearchBar() {
 
     const form = useSelector((state) => state.search.form)
 
-    const changePickupBranch = (branchId) =>{
-        dispatch(setPickupBranch(branchId))
+    const changePickupBranch = (branch) =>{
+        dispatch(setPickupBranch(branch))
     }
 
-    const changeDropBranch = (branchId) =>{
-        dispatch(setDropBranch(branchId))
+    const changeDropBranch = (branch) =>{
+        dispatch(setDropBranch(branch))
     }
 
     const changePickupDate = (date) =>{
@@ -70,13 +70,13 @@ function BookingSearchBar() {
         );
     });
 
-
+    console.log(form)
 
     function handleSearch() {
 
         // TODO:
         // Redux + Backend later
-        if (form.pickupBranch === 0 || form.dropBranch === 0 || form.pickupDate === null || form.returnDate === null) {
+        if (!form.pickupBranch || !form.dropBranch  || !form.pickupDate  || !form.returnDate) {
             setError(true)
             setShowAlert(true)
         }
@@ -146,7 +146,7 @@ function BookingSearchBar() {
                                                 filteredPickup.map(branch => (
                                                     <button key={branch.id} type="button" className="dropdown-item"
                                                         onClick={() => {
-                                                            changePickupBranch(branch.id);
+                                                            changePickupBranch(branch);
                                                             setPickupSearch(branch.name);
                                                             setShowPickup(false);
                                                         }}
@@ -192,7 +192,7 @@ function BookingSearchBar() {
                                                 filteredDrop.map(branch => (
                                                     <button key={branch.id} type="button" className="dropdown-item"
                                                         onClick={() => {
-                                                            changeDropBranch(branch.id);
+                                                            changeDropBranch(branch);
                                                             setDropSearch(branch.name);
                                                             setShowDrop(false);
                                                         }}
