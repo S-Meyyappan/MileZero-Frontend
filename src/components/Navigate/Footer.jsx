@@ -87,7 +87,7 @@ function Footer() {
                         </h6>
                         <div className="d-flex align-items-center gap-2 mb-3 text-secondary">
                             <IconMapPin size={18} />
-                            Bengaluru, Karnataka
+                            Dindigul, Tamilnadu
                         </div>
                         <div className="d-flex align-items-center gap-2 mb-3 text-secondary">
                             <IconPhone size={18} />

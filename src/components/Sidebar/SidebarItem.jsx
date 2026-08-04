@@ -20,36 +20,24 @@ function SidebarItem({ item, expanded }) {
 
     if (!hasChildren) {
 
-        return (
-
-            <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                    `nav-link rounded-3 d-flex align-items-center px-3 py-2 ${
-                        isActive
-                            ? "bg-primary-subtle text-primary"
-                            : "text-secondary"
-                    }`
-                }
-            >
-
-                <Icon
-                    size={21}
-                    className="flex-shrink-0"
-                />
-
-                <span
-                    className={`sidebar-label ms-3 ${
-                        expanded ? "show-label" : ""
-                    }`}
+        if (item.onClick) {
+            return (
+                <button
+                    type="button"
+                    onClick={item.onClick}
+                    className="btn w-100 text-start rounded-3 d-flex align-items-center px-3 py-2"
                 >
-                    {item.title}
-                </span>
+                    <Icon size={21} className="flex-shrink-0" />
 
-            </NavLink>
-
-        );
-
+                    <span
+                        className={`sidebar-label ms-3 ${expanded ? "show-label" : ""
+                            }`}
+                    >
+                        {item.title}
+                    </span>
+                </button>
+            );
+        }
     }
 
     // -------------------------
@@ -71,9 +59,8 @@ function SidebarItem({ item, expanded }) {
                 />
 
                 <span
-                    className={`sidebar-label ms-3 flex-grow-1 ${
-                        expanded ? "show-label" : ""
-                    }`}
+                    className={`sidebar-label ms-3 flex-grow-1 ${expanded ? "show-label" : ""
+                        }`}
                 >
                     {item.title}
                 </span>
@@ -92,7 +79,8 @@ function SidebarItem({ item, expanded }) {
 
             {
                 expanded &&
-                open && (
+                open && 
+                hasChildren &&(
 
                     <div className="mt-2 ms-5 d-flex flex-column gap-2">
 
@@ -102,10 +90,9 @@ function SidebarItem({ item, expanded }) {
                                 key={child.title}
                                 to={child.path}
                                 className={({ isActive }) =>
-                                    `nav-link py-1 px-2 rounded small ${
-                                        isActive
-                                            ? "text-primary fw-semibold"
-                                            : "text-secondary"
+                                    `nav-link py-1 px-2 rounded small ${isActive
+                                        ? "text-primary fw-semibold"
+                                        : "text-secondary"
                                     }`
                                 }
                             >

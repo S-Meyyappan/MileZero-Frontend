@@ -17,11 +17,14 @@ import Booking from './pages/Booking';
 import './app.css'
 import VehicleSearch from './pages/AvailableVehicle';
 import AvailableVehicle from './pages/AvailableVehicle';
+import AuthPage from './pages/AuthPage';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
   return (
     <>
+    <Toaster position='top-right'/>
       <Routes>
 
         {/* Public */}
@@ -32,6 +35,8 @@ function App() {
           <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
           <Route path="/booking/:vehicleId" element={<Booking />} />
         </Route>
+
+        <Route path="/auth" element={<AuthPage />}/>
 
         {/* Dashboard */}
 

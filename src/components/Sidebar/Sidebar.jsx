@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+
 
 import {
     IconCoinMoneroFilled,
@@ -12,8 +14,19 @@ import SidebarItem from "./SidebarItem";
 
 import "../../css/Sidebar.css"
 
+import { logoutUser } from "../../store/actions/AuthActions";
+
 
 function Sidebar({ role }) {
+
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        navigate("/");
+    };
 
     const [expanded, setExpanded] = useState(false);
 
@@ -22,9 +35,8 @@ function Sidebar({ role }) {
     return (
 
         <aside
-            className={`sidebar bg-white border-end shadow-sm d-flex flex-column ${
-                expanded ? "expanded" : ""
-            }`}
+            className={`sidebar bg-white border-end shadow-sm d-flex flex-column ${expanded ? "expanded" : ""
+                }`}
             onMouseEnter={() => setExpanded(true)}
             onMouseLeave={() => setExpanded(false)}
         >
@@ -62,21 +74,21 @@ function Sidebar({ role }) {
             {/* Bottom */}
 
             <div className="mt-auto border-top p-3 d-flex flex-column gap-2">
-                <SidebarItem
+                {/* <SidebarItem
                     expanded={expanded}
                     item={{
                         title: "Profile",
                         icon: IconUserCircle,
                         path: "/profile"
                     }}
-                />
+                /> */}
 
                 <SidebarItem
                     expanded={expanded}
                     item={{
                         title: "Logout",
                         icon: IconLogout2,
-                        path: "/logout"
+                        onClick: handleLogout
                     }}
                 />
             </div>

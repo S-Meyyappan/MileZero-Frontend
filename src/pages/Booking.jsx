@@ -94,8 +94,6 @@ export default function Booking() {
         
         const calculateQuote = async () => {
 
-            if (!vehicle || !form?.pickupDate || !form?.returnDate) return;
-
             const quoteBody = getBookingBody()
 
             console.log("quoteBody",quoteBody)
@@ -106,7 +104,7 @@ export default function Booking() {
         }
 
         calculateQuote()
-    }, [requestedKm, form, selectedAddons])
+    }, [requestedKm, form, selectedAddons, vehicle])
 
 
     return (

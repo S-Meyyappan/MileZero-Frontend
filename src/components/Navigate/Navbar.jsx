@@ -1,4 +1,5 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import {
     IconCar,
     IconLogin2,
@@ -13,8 +14,11 @@ import "../../App.css"
 
 function Navbar() {
 
-    // Replace later with authentication state
-    const isLoggedIn = false;
+    const navigate = useNavigate()
+
+    const auth = useSelector((state) => state.auth.form)
+
+    const isLoggedIn = auth.token === "" ? false : true
 
     return (
 
@@ -76,13 +80,9 @@ function Navbar() {
                         <div className="d-flex gap-2">
                             {!isLoggedIn ? (
                                 <>
-                                    <button className="btn btn-light d-flex align-items-center gap-2">
+                                    <button className="btn btn-primary d-flex align-items-center gap-2" onClick= {() => navigate("/auth")} >
                                         <IconLogin2 size={18} />
                                         Login
-                                    </button>
-                                    <button className="btn btn-primary d-flex align-items-center gap-2">
-                                        <IconUserPlus size={18} />
-                                        Sign Up
                                     </button>
                                 </>
                             ) : (

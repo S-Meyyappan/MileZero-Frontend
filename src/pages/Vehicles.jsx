@@ -73,21 +73,21 @@ function Vehicles(){
     }, [dispatch])
 
     // Get Vehicles
-        useEffect(() => {
-            const getAllVehicles = async () => {
-                   
-                try {
-                    const response = await axios.get(`http://localhost:8080/api/vehicle/get-all`, { params : queryParams })
-                    setPageData(response.data)
-                    setVehicles(response.data.content)
-                }
-                catch (err) {
-                    console.log(err)
-                }
+    useEffect(() => {
+        const getAllVehicles = async () => {
+
+            try {
+                const response = await axios.get(`http://localhost:8080/api/vehicle/get-all`, { params : queryParams })
+                setPageData(response.data)
+                setVehicles(response.data.content)
             }
-    
-            getAllVehicles()
-        }, [page, search, selectedCategory, filters])
+            catch (err) {
+                console.log(err)
+            }
+        }
+
+        getAllVehicles()
+    }, [page, search, selectedCategory, filters])
 
     return (
         <div className="container py-5">

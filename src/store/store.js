@@ -6,6 +6,7 @@ import { BrandReducer } from "./reducer/BrandReducer";
 import { SeatReducer } from "./reducer/SeatReducer";
 import { FueltypeReducer } from "./reducer/FueltypeReducer";
 import { TransmissionReducer } from "./reducer/TransmissionReducer";
+import { AuthReducer } from "./reducer/AuthReducer";
 
 export default configureStore({
     reducer : {
@@ -15,6 +16,7 @@ export default configureStore({
         brand : BrandReducer,
         seat : SeatReducer,
         fueltype : FueltypeReducer,
-        transmission : TransmissionReducer
+        transmission : TransmissionReducer,
+        auth : AuthReducer
     }
 })

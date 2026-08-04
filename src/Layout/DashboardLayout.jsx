@@ -1,16 +1,38 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 import {
     IconBell,
+    IconLogout2,
     IconSearch
 } from "@tabler/icons-react";
 
 import Sidebar from "../components/Sidebar/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../store/actions/AuthActions";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 function DashboardLayout() {
 
-    // Replace later with auth context
-    const role = "ADMIN";
+    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+
+    const auth = useSelector((state) => state.auth.form)
+    console.log("dashboard :",auth)
+
+    const role = auth.role;
+
+    const handleLogout = () => {
+        dispatch(logoutUser())
+    }
+
+    useEffect(() => {
+        if (auth.token === "") {
+            toast.success('Logged Out');
+            navigate("/");
+        }
+    }, [auth])
 
     return (
 
@@ -35,7 +57,7 @@ function DashboardLayout() {
                             {/* Left */}
                             <div>
                                 <h3 className="display-sm mb-1">Dashboard</h3>
-                                <div className="text-body-secondary">Welcome back 👋</div>
+                                <div className="text-body-secondary">Welcome back {auth.username} 👋</div>
                             </div>
 
                             {/* Right */}
@@ -89,7 +111,7 @@ function DashboardLayout() {
                                         <li><button className="dropdown-item">Profile</button></li>
                                         <li><button className="dropdown-item">Settings</button></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><button className="dropdown-item text-danger">Logout</button></li>
+                                        <li><button className="dropdown-item text-danger" onClick={() => handleLogout()}>Logout</button></li>
                                     </ul>
 
                                 </div>
