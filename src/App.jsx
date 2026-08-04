@@ -27,6 +27,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/vehicles" element={<Vehicles />} />
           <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
+          <Route path="/booking/:vehicleId" element={<Booking />} />
         </Route>
 
         {/* Dashboard */}
