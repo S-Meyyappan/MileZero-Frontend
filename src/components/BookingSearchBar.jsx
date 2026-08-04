@@ -82,7 +82,7 @@ function BookingSearchBar() {
         }
         else {
             setShowAlert(false);
-            navigate("/vehicles");
+            navigate("/available-vehicle");
         }
     }
 

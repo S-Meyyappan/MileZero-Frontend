@@ -26,7 +26,7 @@ function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmissions,
                     >
                         <option value="">All Brands</option>
                         {
-                            brands.map((b,index) => (
+                            brands?.map((b,index) => (
                                 <option key={index} value={b}>{b}</option>
                             ))
                         }
@@ -45,7 +45,7 @@ function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmissions,
                     >
                         <option value="">Fuel Type</option>
                         {
-                            fuelTypes.map((f,index) => (
+                            fuelTypes?.map((f,index) => (
                                 <option key={index} value={f}>{f}</option>
                             ))
                         }
@@ -68,7 +68,7 @@ function VehicleToolbar({ filters, setFilters, brands, fuelTypes, transmissions,
 
                         <option value=""> Transmission </option>
                         {
-                            transmissions.map((t,index) => (
+                            transmissions?.map((t,index) => (
                                 <option key={index} value={t}>{t}</option>
                             ))
                         }

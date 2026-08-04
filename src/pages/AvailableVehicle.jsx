@@ -15,7 +15,8 @@ import { getAllFuelTypes } from "../store/actions/FueltypeActions";
 import { getAllTransmissions } from "../store/actions/TransmissionActions";
 import { getAllSeats } from "../store/actions/SeatActions";
 
-function Vehicles(){
+
+function AvailableVehicle() {
 
     const dispatch = useDispatch()
 
@@ -72,24 +73,33 @@ function Vehicles(){
         dispatch(getAllSeats())
     }, [dispatch])
 
+
     // Get Vehicles
-        useEffect(() => {
-            const getAllVehicles = async () => {
-                   
-                try {
-                    const response = await axios.get(`http://localhost:8080/api/vehicle/get-all`, { params : queryParams })
-                    setPageData(response.data)
-                    setVehicles(response.data.content)
-                }
-                catch (err) {
-                    console.log(err)
-                }
+    useEffect(() => {
+        const getAvailableVehicles = async () => {
+            if (!form.pickupBranch || !form.dropBranch || !form?.pickupDate || !form?.returnDate) return;
+
+            const body = {
+                "chosenPickup": new Date(form.pickupDate).toISOString(),
+                "chosenReturn": new Date(form.returnDate).toISOString(),
+                "branchId": form.pickupBranch.id
             }
-    
-            getAllVehicles()
-        }, [page, search, selectedCategory, filters])
+
+            try {
+                const response = await axios.post(`http://localhost:8080/api/availability/fleet`, body, { params: queryParams })
+                setPageData(response.data)
+                setVehicles(response.data.content)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+
+        getAvailableVehicles()
+    }, [page, search, selectedCategory, filters, form])
 
     return (
+
         <div className="container py-5">
 
             <VehicleSearch
@@ -141,7 +151,9 @@ function Vehicles(){
             />
 
         </div>
-    )
+
+    );
+
 }
 
-export default Vehicles
+export default AvailableVehicle;

@@ -15,6 +15,8 @@ import VehicleDetails from './pages/VehicleDetails';
 import Booking from './pages/Booking';
 
 import './app.css'
+import VehicleSearch from './pages/AvailableVehicle';
+import AvailableVehicle from './pages/AvailableVehicle';
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
         {/* Public */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/available-vehicle" element={<AvailableVehicle />} />
           <Route path="/vehicles" element={<Vehicles />} />
           <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
           <Route path="/booking/:vehicleId" element={<Booking />} />

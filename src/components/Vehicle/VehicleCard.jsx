@@ -111,7 +111,7 @@ function VehicleCard({
             <div className="vehicle-footer">
                 <div>
                     <div className="vehicle-price">
-                        ₹{vehicle?.category.basePricePerDay}
+                        ₹{vehicle?.category?.basePricePerDay}
                     </div>
 
                     <div className="price-day">
