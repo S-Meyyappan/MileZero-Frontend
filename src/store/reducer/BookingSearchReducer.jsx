@@ -1,10 +1,14 @@
+import { calcDuration } from "../../utils/calcDuration";
 
 const initialState = {
     form: {
         pickupBranch: null,
         dropBranch: null,
-        pickupDate: Date.now(), // Simple number storing in milliseconds
-        returnDate: Date.now() + 24 * 60 * 60 * 1000 
+        pickupDate: Date.now(),
+        returnDate: Date.now() + 24 * 60 * 60 * 1000,
+
+        bookingMode: "DAY",
+        duration: 1,
     }
 }
 
@@ -29,35 +33,89 @@ export const BookingSearchReducer = (state = initialState, action) => {
                 }
             }
 
-        case 'SET_PICKUP_DATE':
-            let newPickupDate = action.payload
-            let existingReturnDate = state.form.returnDate
-            
-            // return date should not be after new pickupdate
-            if (existingReturnDate < newPickupDate) {
-                existingReturnDate = newPickupDate + (24 * 60 * 60 * 1000);
+        case "SET_PICKUP_DATE": {
+
+            let pickupDate = action.payload;
+            let returnDate = state.form.returnDate;
+
+            if (returnDate < pickupDate) {
+                returnDate = pickupDate + 24 * 60 * 60 * 1000;
             }
+
+            const result = calcDuration(
+                pickupDate,
+                returnDate,
+                state.form.bookingMode
+            );
 
             return {
                 ...state,
                 form: {
                     ...state.form,
-                    pickupDate: newPickupDate,
-                    returnDate: existingReturnDate
+                    pickupDate,
+                    returnDate,
+                    ...result
                 }
-            }
+            };
+        }
 
-        case 'SET_RETURN_DATE':
-             return {
+        case "SET_RETURN_DATE": {
+
+            const returnDate = action.payload;
+
+            const result = calcDuration(
+                state.form.pickupDate,
+                returnDate,
+                state.form.bookingMode
+            );
+
+            return {
                 ...state,
                 form: {
                     ...state.form,
-                    returnDate: action.payload
+                    returnDate,
+                    ...result
                 }
-            }
+            };
+        }
 
-        case 'RESET_BOOKING_FORM':
-            return initialState
+        case "RESET_BOOKING_FORM": {
+
+            const pickupDate = Date.now();
+            const returnDate = pickupDate + 24 * 60 * 60 * 1000;
+            const bookingMode = "DAY";
+
+            return {
+                form: {
+                    pickupBranch: null,
+                    dropBranch: null,
+                    pickupDate,
+                    returnDate,
+                    bookingMode,
+                    ...calcDuration(pickupDate, returnDate, bookingMode)
+                }
+            };
+        }
+
+        case "SET_BOOKING_MODE": {
+
+            const bookingMode = action.payload;
+
+            const result = calcDuration(
+                state.form.pickupDate,
+                state.form.returnDate,
+                bookingMode
+            );
+
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    bookingMode,
+                    ...result
+                }
+            };
+        }
 
         default:
             return state

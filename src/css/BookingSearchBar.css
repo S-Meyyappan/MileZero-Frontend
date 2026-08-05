@@ -93,6 +93,38 @@
 }
 
 /* ==========================================
+   Switch toggle
+========================================== */
+.booking-mode-toggle {
+    display: inline-flex;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 50rem;
+    padding: 3px;
+    gap: 2px;
+}
+
+.booking-mode-toggle button {
+    border: 0;
+    background: transparent;
+    padding: 4px 14px;
+    border-radius: 50rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6c757d;
+    transition: all .2s ease;
+}
+
+.booking-mode-toggle button.active {
+    background: #0d6efd;
+    color: #fff;
+}
+
+.booking-mode-toggle button:hover:not(.active) {
+    background: rgba(13, 110, 253, .08);
+}
+
+/* ==========================================
    Responsive
 ========================================== */
 

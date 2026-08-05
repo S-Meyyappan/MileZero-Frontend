@@ -18,6 +18,11 @@ export const setReturnDate = (dateString) => ({
   payload: dateString.getTime()
 });
 
+export const setBookingMode = (mode) => ({
+    type: "SET_BOOKING_MODE",
+    payload: mode // "DAY" | "HOUR"
+});
+
 export const resetBookingForm = () => ({
   type: "RESET_BOOKING_FORM"
 });

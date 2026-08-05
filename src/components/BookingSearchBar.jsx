@@ -17,9 +17,9 @@ import {
 import "../css/BookingSearchBar.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setPickupBranch, setDropBranch, setPickupDate, setReturnDate } from "../store/actions/BookingSearchActions";
+import { setPickupBranch, setDropBranch, setPickupDate, setReturnDate, setBookingMode } from "../store/actions/BookingSearchActions";
 
-function BookingSearchBar() {
+function BookingSearchBar({ onSearch }) {
 
     const dispatch = useDispatch()
 
@@ -35,19 +35,19 @@ function BookingSearchBar() {
 
     const form = useSelector((state) => state.search.form)
 
-    const changePickupBranch = (branch) =>{
+    const changePickupBranch = (branch) => {
         dispatch(setPickupBranch(branch))
     }
 
-    const changeDropBranch = (branch) =>{
+    const changeDropBranch = (branch) => {
         dispatch(setDropBranch(branch))
     }
 
-    const changePickupDate = (date) =>{
+    const changePickupDate = (date) => {
         dispatch(setPickupDate(new Date(date)))
     }
 
-    const changeReturnDate = (date) =>{
+    const changeReturnDate = (date) => {
         dispatch(setReturnDate(new Date(date)))
     }
 
@@ -76,13 +76,13 @@ function BookingSearchBar() {
 
         // TODO:
         // Redux + Backend later
-        if (!form.pickupBranch || !form.dropBranch  || !form.pickupDate  || !form.returnDate) {
+        if (form.pickupBranch === null || form.dropBranch === null || !form.pickupDate || !form.returnDate) {
             setError(true)
             setShowAlert(true)
         }
         else {
             setShowAlert(false);
-            navigate("/available-vehicle");
+            onSearch()
         }
     }
 
@@ -118,7 +118,7 @@ function BookingSearchBar() {
 
                 <div className="card border-0 shadow-sm rounded-5">
 
-                    <div className="card-body py-2">
+                    <div className="card-body pt-2 pb-2">
 
                         <div className="row g-5 align-items-center">
 
@@ -262,10 +262,40 @@ function BookingSearchBar() {
                             {/* Search */}
 
                             <div className="col-lg-2 p-2">
-                                <button className="btn btn-warning w-100 rounded-4 fw-semibold py-3" onClick={handleSearch}>
+                                <div className="d-flex justify-content-start flex-column p-2">
+                                    <div className="booking-mode-toggle">
+
+                                        <button
+                                            type="button"
+                                            className={form.bookingMode === "DAY" ? "active w-50" : "w-50"}
+                                            onClick={() => dispatch(setBookingMode("DAY"))}
+                                        >
+                                            Day
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            className={form.bookingMode === "HOUR" ? "active" : ""}
+                                            onClick={() => dispatch(setBookingMode("HOUR"))}
+                                        >
+                                            Hour
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <button className="btn btn-warning w-100 rounded-4 fw-semibold py-2" onClick={() => handleSearch()}>
                                     <IconSearch size={18} className="me-2" />
                                     Search
                                 </button>
+                                <div className="d-flex justify-content-around">
+                                    <small className="text-muted d-block mt-2">
+                                        Duration:
+                                        <span className=" text-center fw-semibold text-dark ms-1">
+                                            {form.duration} {form.bookingMode === "DAY" ? "Day" : "Hour"}
+                                            {form.duration > 1 ? "s" : ""}
+                                        </span>
+                                    </small>
+                                </div>
                             </div>
 
                         </div>
