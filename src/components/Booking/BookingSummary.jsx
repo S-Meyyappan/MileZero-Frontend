@@ -52,7 +52,7 @@ export default function BookingSummary({
             <div className="d-flex justify-content-between mb-3">
 
                 <span className="text-muted">
-                    Included Distance
+                    Total Distance
                 </span>
 
                 <strong>
@@ -150,12 +150,12 @@ export default function BookingSummary({
 
             </div>
 
-            <button
-                className="btn btn-primary w-100 rounded-3 py-3 fw-semibold"
-                onClick={onContinue}
-            >
-                Continue to Checkout
-            </button>
+                <button
+                    className="btn btn-primary w-100 rounded-3 py-3 fw-semibold"
+                    onClick={onContinue}
+                >
+                    Continue to Checkout
+                </button>
 
         </div>
     );

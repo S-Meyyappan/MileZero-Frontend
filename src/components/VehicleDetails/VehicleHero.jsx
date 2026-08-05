@@ -8,10 +8,13 @@ import {
 import "../../css/VehicleHero.css"
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 function VehicleHero({ vehicle }) {
 
     const navigate = useNavigate()
+
+    const form = useSelector((state) => state.search.form)
 
     const transmissionIcon = () => {
         if (vehicle?.transmission === "MT" || vehicle?.transmission === "MANUAL") {
@@ -91,7 +94,9 @@ function VehicleHero({ vehicle }) {
                         <div className="card border-0 shadow-sm rounded-4 sticky-top booking-summary">
                             <div className="card-body">
                                 <div className="price-label">Starting From</div>
-                                <div className="vehicle-price">₹{vehicle?.category.basePricePerDay} <span>/day</span></div>
+                                <div className="vehicle-price">
+                                    ₹{form.bookingMode === "DAY" ? vehicle?.category?.basePricePerDay : vehicle?.category?.basePricePerHour}
+                                    <span>{form.bookingMode === "DAY" ? "/ day" : "/ hour"}</span></div>
                                 <div className="availability">Available</div>
                                 <button className="btn btn-warning w-100 mt-4"onClick={() => navigate(`/booking/${vehicle?.id}`)}>Continue Booking</button>
                             </div>

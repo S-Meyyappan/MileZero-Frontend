@@ -14,16 +14,23 @@ import {
 import { useNavigate } from "react-router";
 
 import "../../css/VehicleCard.css"
+import { useSelector } from "react-redux";
 
 function VehicleCard({
     vehicle,
     image,
     favourite = false,
     pricePerDay,
-    onClick
+    onClick,
+    variant = "default",
+    showWishlist = true,
+    showViewDetails = true,
+    disableNavigation = false,
 }) {
 
     const navigate = useNavigate();
+
+    const form = useSelector((state) => state.search.form)
 
     const automaticTypes = ["AT", "AMT", "CVT", "DCT"];
 
@@ -38,15 +45,18 @@ function VehicleCard({
                 ? <IconCylinder size={18} />
                 : <IconGasStation size={18} />;
 
-    const withAcIcon = vehicle?.withAc 
-            ? <IconSnowflake size={18} />
-            : <IconSnowflakeOff size={18} />
+    const withAcIcon = vehicle?.withAc
+        ? <IconSnowflake size={18} />
+        : <IconSnowflakeOff size={18} />
 
 
     return (
 
         <div
-            className="vehicle-card"
+            className={`vehicle-card ${variant === "review"
+                    ? "vehicle-card-review"
+                    : ""
+                }`}
             onClick={onClick}
         >
 
@@ -57,12 +67,20 @@ function VehicleCard({
                     {vehicle?.manufacturer || vehicle?.name}
                 </span>
 
-                <button className="wishlist-btn" onClick={(e) => e.stopPropagation()}>
-                    {favourite
-                        ? <IconHeartFilled size={20} />
-                        : <IconHeart size={20} />
-                    }
-                </button>
+                {showWishlist && (
+
+                    <button
+                        className="wishlist-btn"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {
+                            favourite
+                                ? <IconHeartFilled size={20} />
+                                : <IconHeart size={20} />
+                        }
+                    </button>
+
+                )}
             </div>
 
             {/* Image */}
@@ -111,17 +129,32 @@ function VehicleCard({
             <div className="vehicle-footer">
                 <div>
                     <div className="vehicle-price">
-                        ₹{vehicle?.category?.basePricePerDay}
+                        ₹{form.bookingMode === "DAY" ? vehicle?.category?.basePricePerDay : vehicle?.category?.basePricePerHour}
                     </div>
 
                     <div className="price-day">
-                        / day
+                        {form.bookingMode === "DAY" ? "/ day" : "/ hour"}
                     </div>
                 </div>
 
-                <button className="details-btn" onClick={() => navigate(`/vehicle-details/${vehicle?.id}`)}>
-                    View Details →
-                </button>
+                {showViewDetails && (
+
+                    <button
+                        className="details-btn"
+                        onClick={(e) => {
+
+                            e.stopPropagation();
+
+                            if (!disableNavigation) {
+                                navigate(`../vehicle-details/${vehicle?.id}`);
+                            }
+
+                        }}
+                    >
+                        View Details →
+                    </button>
+
+                )}
             </div>
 
         </div>

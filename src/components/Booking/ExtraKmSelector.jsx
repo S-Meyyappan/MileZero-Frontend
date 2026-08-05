@@ -53,7 +53,7 @@ export default function ExtraKmSelector({
                 <div className="col-md-8">
 
                     <label className="form-label fw-semibold">
-                        Total Distance Required
+                        Additional Km Required
                     </label>
 
                     <input
@@ -91,7 +91,7 @@ export default function ExtraKmSelector({
                             } rounded-pill`}
                             onClick={() =>
                                 setRequestedKm(
-                                    includedKm + km
+                                    km
                                 )
                             }
                         >

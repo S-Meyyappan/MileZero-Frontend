@@ -216,3 +216,17 @@
     transform:translateX(4px);
 
 }
+
+.vehicle-card-review{
+
+    cursor:default;
+
+}
+
+.vehicle-card-review:hover{
+
+    transform:none;
+
+    box-shadow:var(--bs-box-shadow-sm);
+
+}
