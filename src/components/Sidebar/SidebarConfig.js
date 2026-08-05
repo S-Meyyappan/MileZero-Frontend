@@ -12,7 +12,8 @@ import {
     IconUsers,
     IconUserStar,
     IconCategory,
-    IconCurrencyRupee
+    IconCurrencyRupee,
+    IconHome
 } from "@tabler/icons-react";
 
 const sidebarConfig = {
@@ -20,9 +21,15 @@ const sidebarConfig = {
     CUSTOMER: [
 
         {
+            title: "Home",
+            icon: IconHome,
+            path: "/"
+        },
+
+        {
             title: "Dashboard",
             icon: IconLayoutDashboard,
-            path: "/dashboard"
+            path: "/vehicle"
         },
 
         {

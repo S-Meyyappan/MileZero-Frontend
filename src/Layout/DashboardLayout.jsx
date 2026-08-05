@@ -19,20 +19,21 @@ function DashboardLayout() {
     const navigate = useNavigate()
 
     const auth = useSelector((state) => state.auth.form)
-    console.log("dashboard :",auth)
+    console.log("dashboard :", auth)
 
     const role = auth.role;
 
     const handleLogout = () => {
-        dispatch(logoutUser())
-    }
 
-    useEffect(() => {
-        if (auth.token === "") {
-            toast.success('Logged Out');
-            navigate("/");
-        }
-    }, [auth])
+        dispatch(logoutUser());
+
+        clearAuth();
+
+        toast.success("Logged Out");
+
+        navigate("/", { replace: true });
+
+    };
 
     return (
 
@@ -101,9 +102,9 @@ function DashboardLayout() {
                                                 height: "38px"
                                             }}
                                         >
-                                            {role.slice(0,1)}
+                                            {auth.username.slice(0, 1)}
                                         </div>
-                                        <span>{role.toLocaleLowerCase()}</span>
+                                        <span>{auth.username.toLocaleLowerCase()}</span>
 
                                     </button>
 
