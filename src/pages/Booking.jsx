@@ -6,9 +6,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllAddons } from "../store/actions/AddonActions";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { saveBookingDraft } from "../store/actions/BookingDraftActions";
 
 export default function Booking() {
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -30,7 +33,7 @@ export default function Booking() {
         }));
     };
 
-    
+
     const [quote, setQuote] = useState(null)
 
     const { vehicleId } = useParams()
@@ -42,35 +45,43 @@ export default function Booking() {
     const form = useSelector((state) => state.search.form)
 
     const getBookingBody = () => {
-            
-            const selectedAddonList = Object.entries(selectedAddons).map(([id, quantity]) => ({
-                addonId: Number(id),
-                quantity,
-            }));
 
-            const bookingBody = {
-                "plannedPickup": new Date(form.pickupDate).toISOString(),
-                "plannedReturn": new Date(form.returnDate).toISOString(),
-                "requestedKm": requestedKm,
-                "customerId": 2,
-                "categoryId": vehicle?.category.id,
-                "pickupBranchId": form?.pickupBranch.id,
-                "returnBranchId": form?.pickupBranch.id,
-                "bookingType": "DAILY",
-                "bookingAddons": selectedAddonList,
-                "vehicleId": vehicle.id
-            }
+        const selectedAddonList = Object.entries(selectedAddons).map(([id, quantity]) => ({
+            addonId: Number(id),
+            quantity,
+        }));
 
-            return bookingBody
+        const bookingBody = {
+            "plannedPickup": new Date(form.pickupDate).toISOString(),
+            "plannedReturn": new Date(form.returnDate).toISOString(),
+            "requestedKm": requestedKm,
+            "categoryId": vehicle?.category.id,
+            "pickupBranchId": form?.pickupBranch.id,
+            "returnBranchId": form?.pickupBranch.id,
+            "bookingType": form.bookingMode === "DAY" ? "DAILY" : "HOURLY",
+            "bookingAddons": selectedAddonList,
+            "vehicleId": vehicle.id
         }
 
-        const handleContinue = async () => {
-            const body = getBookingBody()
+        return bookingBody
+    }
 
-            const response = await axios.post("http://localhost:8080/api/booking/add", body)
+    const bookingdraft = useSelector((state) => state.booking.draft)
 
-            console.log(response.data)
-        console.log("Continue Booking");
+    const handleContinue = async () => {
+        dispatch(saveBookingDraft({
+            vehicle,
+            form,
+            quote,
+            requestedKm,
+            selectedAddons,
+            addons,
+            bookingBody: getBookingBody()
+        }));
+
+        console.log(bookingdraft)
+
+        navigate("/review-booking");
     };
 
     useEffect(() => {
@@ -91,7 +102,7 @@ export default function Booking() {
     }, [dispatch])
 
     useEffect(() => {
-        
+
         const calculateQuote = async () => {
 
             const quoteBody = getBookingBody()

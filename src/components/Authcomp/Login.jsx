@@ -5,7 +5,7 @@ import { loginUser } from "../../store/actions/AuthActions";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
-const Login = () => {
+const Login = ({ onSuccess }) => {
 
     const navigate = useNavigate()
 
@@ -22,19 +22,28 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(loginUser(email, password))
-        console.log("login page :",auth)
+        console.log("login page :", auth)
     };
 
     useEffect(() => {
+
         if (auth.token) {
+
             toast.success("Logged In Successfully");
-            navigate("/dashboard");
+
+            if (onSuccess) {
+                onSuccess();
+            } else {
+                navigate("/dashboard");
+            }
+
         }
 
         if (auth.errMessage) {
             toast.error(auth.errMessage);
         }
-    }, [auth, navigate]);
+
+    }, [auth]);
 
     return (
         <form onSubmit={handleSubmit} noValidate>
