@@ -1,4 +1,6 @@
 import axios from "axios";
+import { clearAuth, saveAuth } from "../../utils/authStorage";
+
 
 export const loginUser = (email, password) => async (dispatch) => {
     try {
@@ -17,6 +19,8 @@ export const loginUser = (email, password) => async (dispatch) => {
             type: "AUTH/LOGIN_SUCCESS",
             payload: response.data
         });
+        saveAuth(response.data)
+
     } catch (error) {
 
         dispatch({
@@ -26,6 +30,10 @@ export const loginUser = (email, password) => async (dispatch) => {
     }
 };
 
-export const logoutUser = () => ({
-    type: "AUTH/LOGOUT"
-})
+export const logoutUser = () => (dispatch) => {
+    clearAuth()
+    dispatch({
+        type: "AUTH/LOGOUT"
+    })
+    
+}
