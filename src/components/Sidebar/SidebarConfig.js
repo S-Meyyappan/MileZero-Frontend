@@ -29,25 +29,19 @@ const sidebarConfig = {
         {
             title: "Dashboard",
             icon: IconLayoutDashboard,
-            path: "/vehicle"
+            path: "home"
         },
 
         {
             title: "Profile",
             icon: IconUserCircle,
-            path: "/profile"
-        },
-
-        {
-            title: "Favorites",
-            icon: IconHeart,
-            path: "/favorites"
+            path: "customer-profile"
         },
 
         {
             title: "Bookings",
             icon: IconCalendarEvent,
-            path: "/bookings"
+            path: "my-bookings"
         }
 
     ],
@@ -113,13 +107,7 @@ const sidebarConfig = {
         {
             title: "Branch",
             icon: IconBuilding,
-            path: "/branch"
-        },
-
-        {
-            title: "Bookings",
-            icon: IconCalendarEvent,
-            path: "/employee/bookings"
+            path: "my-bookings"
         }
 
     ],
@@ -141,7 +129,7 @@ const sidebarConfig = {
         {
             title: "Bookings",
             icon: IconCalendarEvent,
-            path: "/manager/bookings"
+            path: "my-bookings"
         },
 
         {

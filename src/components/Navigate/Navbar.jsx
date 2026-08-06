@@ -130,7 +130,7 @@ function Navbar() {
                                         <li>
                                             <button
                                                 className="dropdown-item"
-                                                onClick={() => navigate("/dashboard/bookings")}
+                                                onClick={() => navigate("/dashboard/my-bookings")}
                                             >
                                                 My Bookings
                                             </button>

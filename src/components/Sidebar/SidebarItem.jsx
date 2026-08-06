@@ -39,7 +39,7 @@ function SidebarItem({ item, expanded }) {
             <NavLink
                 to={item.path}
                 className={({ isActive }) =>
-                    `btn w-100 text-start rounded-3 d-flex align-items-center px-3 py-2 text-decoration-none ${isActive ? "active" : ""
+                    `btn w-100 text-start rounded-3 d-flex align-items-center px-3 py-2 ${isActive ? "text-primary active" : ""
                     }`
                 }
             >
@@ -48,6 +48,7 @@ function SidebarItem({ item, expanded }) {
                 <span className={`sidebar-label ms-3 ${expanded ? "show-label" : ""}`}>
                     {item.title}
                 </span>
+                
             </NavLink>
         );
     }
@@ -60,39 +61,26 @@ function SidebarItem({ item, expanded }) {
 
         <div>
 
-            <button
-                className="btn w-100 text-start d-flex align-items-center rounded-3 px-3 py-2 border-0"
+            <button className="btn w-100 text-start d-flex align-items-center rounded-3 px-3 py-2 border-0"
                 onClick={() => setOpen(!open)}
             >
 
-                <Icon
-                    size={21}
-                    className="text-secondary flex-shrink-0"
-                />
+                <Icon size={21} className="text-secondary flex-shrink-0" />
 
-                <span
-                    className={`sidebar-label ms-3 flex-grow-1 ${expanded ? "show-label" : ""
-                        }`}
-                >
+                <span className={`sidebar-label ms-3 flex-grow-1 ${expanded ? "show-label" : "" }`} >
                     {item.title}
                 </span>
 
                 {expanded && hasChildren && (
 
-                    open
-
-                        ? <IconChevronDown size={18} />
-
-                        : <IconChevronRight size={18} />
-
+                    open ? <IconChevronDown size={18} /> : <IconChevronRight size={18} /> 
+                    
                 )}
 
             </button>
 
             {
-                expanded &&
-                open &&
-                hasChildren && (
+                expanded && open && hasChildren && (
 
                     <div className="mt-2 ms-5 d-flex flex-column gap-2">
 

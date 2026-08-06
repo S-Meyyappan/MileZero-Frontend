@@ -25,15 +25,15 @@ function BookingSearchBar({ onSearch }) {
 
     const navigate = useNavigate();
 
+    const form = useSelector((state) => state.search.form)
+
     const [branches, setBranches] = useState([]);
 
-    const [pickupSearch, setPickupSearch] = useState("");
+    const [pickupSearch, setPickupSearch] = useState(form?.pickupBranch?.name || "");
     const [showPickup, setShowPickup] = useState(false);
 
-    const [dropSearch, setDropSearch] = useState("");
+    const [dropSearch, setDropSearch] = useState(form?.dropBranch?.name || "");
     const [showDrop, setShowDrop] = useState(false);
-
-    const form = useSelector((state) => state.search.form)
 
     const changePickupBranch = (branch) => {
         dispatch(setPickupBranch(branch))

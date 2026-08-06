@@ -4,7 +4,7 @@ import VehicleSearch from "../components/Vehicle/VehicleSearch";
 import VehicleCategories from "../components/Vehicle/VehicleCategories";
 import VehicleToolbar from "../components/Vehicle/VehicleToolbar";
 import VehicleGrid from "../components/Vehicle/VehicleGrid";
-import VehiclePagination from "../components/Vehicle/VehiclePagination";
+import VehiclePagination from "../components/Navigate/Pagination";
 
 import "../css/Vehicle.css"
 import axios from "axios";
