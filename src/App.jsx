@@ -23,6 +23,10 @@ import AvailableVehicle from './pages/AvailableVehicle';
 import AuthPage from './pages/AuthPage';
 import ProtectedRoute from './pages/ProtectedRoute';
 import BookingReview from './pages/BookingReview';
+import MyBookings from './pages/Customer/MyBookings';
+import MyBookingDetails from './pages/Customer/MyBookingDetails';
+import CustomerProfile from './pages/Customer/CustomerProfile';
+import RecordPickup from './pages/Employee/RecordPickup';
 
 function App() {
 
@@ -55,8 +59,9 @@ function App() {
             <Route path="/available-vehicle" element={<AvailableVehicle />} />
             <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
             <Route path="/booking/:vehicleId" element={<Booking />} />
-            <Route path="/review-booking" element={<BookingReview />} />
         </Route>
+
+        <Route path="/review-booking" element={<BookingReview />} />
 
         <Route path="/auth" element={<AuthPage />} />
 
@@ -64,6 +69,10 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="my-bookings" element={<MyBookings />}/>
+          <Route path="my-bookings/:bookingId" element={<MyBookingDetails />}/>
+          <Route path="customer-profile" element={<CustomerProfile />}/>
+          <Route path="my-bookings/:bookingId/pickup" element={<RecordPickup />}/>
             </Route>
         </Route>
 

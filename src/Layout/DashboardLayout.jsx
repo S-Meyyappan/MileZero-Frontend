@@ -104,15 +104,22 @@ function DashboardLayout() {
                                         >
                                             {auth.username.slice(0, 1)}
                                         </div>
-                                        <span>{auth.username.toLocaleLowerCase()}</span>
+                                        <span>{auth.username}</span>
 
                                     </button>
 
                                     <ul className="dropdown-menu dropdown-menu-end">
-                                        <li><button className="dropdown-item">Profile</button></li>
+                                        {/* <li><button className="dropdown-item">Profile</button></li>
                                         <li><button className="dropdown-item">Settings</button></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><button className="dropdown-item text-danger" onClick={() => handleLogout()}>Logout</button></li>
+                                        <li><hr className="dropdown-divider" /></li> */}
+                                        <li><button className="dropdown-item text-danger" onClick={() => handleLogout()}>
+                                            <div className="d-flex flex-grow-1 justify-content-around align-items-center">
+                                                Logout 
+                                                <IconLogout2 size={18} />
+                                            </div>
+                                            
+                                        </button>
+                                        </li>
                                     </ul>
 
                                 </div>
