@@ -5,7 +5,10 @@ import {
     IconTruckDelivery,
     IconCircleCheck,
     IconDownload,
-    IconReceipt2
+    IconReceipt2,
+    IconCar,
+    IconKey,
+    IconKeyFilled
 } from "@tabler/icons-react";
 
 export default function BookingActionCard({
@@ -16,7 +19,8 @@ export default function BookingActionCard({
     onEdit,
     onReturnVehicle,
     onCompleteBooking,
-    onDownloadInvoice
+    onDownloadInvoice,
+    onRecordPickup
 }) {
 
     const isCustomer = role === "CUSTOMER";
@@ -128,20 +132,17 @@ export default function BookingActionCard({
                         isEmployee &&
                         booking.bookingStatus === "BOOKED" && (
 
-                            <button
-                                className="btn btn-warning w-100"
-                                onClick={onEdit}
-                            >
-
-                                <IconPencil
-                                    size={18}
-                                    className="me-2"
-                                />
-
-                                Mark No Show
-
-                            </button>
-
+                            <>
+                                <button className="btn btn-warning w-100" onClick={onEdit}>
+                                    <IconPencil size={18} className="mb-2" /> &nbsp;
+                                    Mark No Show
+                                </button>
+                                <div className="m-3"></div>
+                                <button className="btn btn-success w-100" onClick={onRecordPickup} disabled={loading}>
+                                    <IconKeyFilled size={18} className="mb-2" /> &nbsp;
+                                    Record Pickup
+                                </button>
+                            </>
                         )
 
                     }

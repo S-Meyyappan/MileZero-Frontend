@@ -23,8 +23,8 @@ import AvailableVehicle from './pages/AvailableVehicle';
 import AuthPage from './pages/AuthPage';
 import ProtectedRoute from './pages/ProtectedRoute';
 import BookingReview from './pages/BookingReview';
-import MyBookings from './pages/Customer/MyBookings';
-import MyBookingDetails from './pages/Customer/MyBookingDetails';
+import MyBookings from './pages/MyBookings';
+import MyBookingDetails from './pages/MyBookingDetails';
 import CustomerProfile from './pages/Customer/CustomerProfile';
 import RecordPickup from './pages/Employee/RecordPickup';
 

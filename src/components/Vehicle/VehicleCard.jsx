@@ -25,7 +25,7 @@ function VehicleCard({
     variant = "default",
     showWishlist = true,
     showViewDetails = true,
-    disableNavigation = false,
+    showRegistrationNo = false,
 }) {
 
     const navigate = useNavigate();
@@ -127,7 +127,14 @@ function VehicleCard({
 
             {/* Footer */}
             <div className="vehicle-footer">
-                <div>
+                { showRegistrationNo ? (
+                    <div>
+                    <div className="vehicle-price">
+                        {vehicle?.registrationNo}
+                    </div>
+                    </div>
+                ) : (
+                    <div>
                     <div className="vehicle-price">
                         ₹{form.bookingMode === "DAY" ? vehicle?.category?.basePricePerDay : vehicle?.category?.basePricePerHour}
                     </div>
@@ -135,25 +142,16 @@ function VehicleCard({
                     <div className="price-day">
                         {form.bookingMode === "DAY" ? "/ day" : "/ hour"}
                     </div>
-                </div>
+                </div>)}
 
                 {showViewDetails && (
 
                     <button
                         className="details-btn"
-                        onClick={(e) => {
-
-                            e.stopPropagation();
-
-                            if (!disableNavigation) {
-                                navigate(`../vehicle-details/${vehicle?.id}`);
-                            }
-
-                        }}
+                        onClick={(e) => { navigate(`../vehicle-details/${vehicle?.id}`)}}
                     >
                         View Details →
                     </button>
-
                 )}
             </div>
 

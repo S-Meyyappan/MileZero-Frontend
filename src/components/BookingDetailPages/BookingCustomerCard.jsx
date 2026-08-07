@@ -18,22 +18,22 @@ export default function BookingCustomerCard({ customer }) {
     const fields = [
         {
             label: "Phone Number",
-            value: customer.phone,
+            value: customer?.phone,
             icon: <IconPhone size={20} className="text-primary" />
         },
         {
             label: "Driving Licence",
-            value: customer.licenseNo,
+            value: customer?.licenseNo,
             icon: <IconCreditCard size={20} className="text-primary" />
         },
         {
             label: "Licence Expiry",
-            value: formatDate(customer.licenseExpiryDate),
+            value: formatDate(customer?.licenseExpiryDate),
             icon: <IconCalendarEvent size={20} className="text-primary" />
         },
         {
             label: "Insurance Policy",
-            value: customer.insurancePolicyNo,
+            value: customer?.insurancePolicyNo,
             icon: <IconShieldCheck size={20} className="text-primary" />
         }
     ];
@@ -69,7 +69,7 @@ export default function BookingCustomerCard({ customer }) {
 
                         <div className="fs-5 fw-semibold">
 
-                            {customer.name}
+                            {customer?.name}
 
                         </div>
 
