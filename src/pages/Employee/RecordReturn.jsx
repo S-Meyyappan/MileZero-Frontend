@@ -7,7 +7,8 @@ import toast from "react-hot-toast";
 
 import {
     IconArrowLeft,
-    IconCarGarage
+    IconCarGarage,
+    IconReportAnalytics
 } from "@tabler/icons-react";
 
 import VehicleCard from "../../components/Vehicle/VehicleCard";
@@ -15,7 +16,7 @@ import BookingCustomerCard from "../../components/BookingDetailPages/BookingCust
 import PickupFormCard from "../../components/Pickup/PickupFormCard";
 import ImageUploadCard from "../../components/Pickup/ImageUploadCard";
 
-export default function RecordPickup() {
+export default function RecordReturn() {
 
     const { bookingId } = useParams();
 
@@ -49,21 +50,16 @@ export default function RecordPickup() {
     const loadBooking = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`http://localhost:8080/api/booking/get/check-pickuplog/${bookingId}`, headerConfig)
+            const response = await axios.get(`http://localhost:8080/api/booking/get/check-returnlog/${bookingId}`, headerConfig)
 
             setBooking(response.data)
-
-            setForm(prevForm => ({
-                ...prevForm,
-                odometer: response.data.vehicle.odometer
-            }))
         }
 
         catch (err) {
             const message = err.response?.data?.message;
 
-            if (message === "Pickuplog already exists for this booking") {
-                setPageError("pickup-exists");
+            if (message === "Returnlog already exists for this booking") {
+                setPageError("return-exists");
                 return;
             }
 
@@ -104,12 +100,12 @@ export default function RecordPickup() {
         }
 
         try {
-            await axios.post("http://localhost:8080/api/pickuplog/add", fd, headerConfig)
-            toast.success("Pickup recorded successfully")
+            await axios.post("http://localhost:8080/api/returnlog/add", fd, headerConfig)
+            toast.success("Returnlog recorded successfully")
             loadBooking()
         }
 
-        catch (err) { toast.error(err?.response?.data.message || "Unable to schedule pickup") }
+        catch (err) { toast.error(err?.response?.data.message || "Unable to schedule return") }
         finally { setLoading(false) }
 
     }
@@ -123,15 +119,15 @@ export default function RecordPickup() {
     }
 
     if (pageError) {
-        return pageError === "pickup-exists" ? (
+        return pageError === "return-exists" ? (
             <div className="container py-5 text-center">
                 <h1 className="fw-bold text-success">
-                    Pickup Recorded
+                    Return Recorded
                 </h1>
 
                 <p className="text-muted mt-3">
-                    A pickup has been recorded for this booking.
-                    You cannot create another pickup log.
+                    A return has been recorded for this booking.
+                    You cannot create another return log.
                 </p>
 
                 <button
@@ -140,6 +136,13 @@ export default function RecordPickup() {
                 >
                     Back to Booking
                 </button>
+
+                <button className="btn mt-3 mx-3 text-dark"style={{ backgroundColor: '#e2d9f3'}}
+                        onClick={() => navigate(`/dashboard/my-bookings/${bookingId}/summary`)}
+                    >
+                        <IconReportAnalytics size={18} className="me-1" />
+                        View Booking Summary
+                    </button>
             </div>
         ) : (
             <div className="container py-5 text-center">
@@ -174,11 +177,11 @@ export default function RecordPickup() {
                             <IconArrowLeft size={18} className="me-2" />
                             Back
                         </button>
-                        <h2 className="fw-bold mb-1">Record Vehicle Pickup</h2>
+                        <h2 className="fw-bold mb-1">Record Vehicle Return</h2>
                         <p className="text-muted mb-0">Booking #{booking?.bookingId}</p>
                     </div>
 
-                    <IconCarGarage size={60} className="text-primary" />
+                    <IconCarGarage size={60} className="text-success" />
                 </div>
 
                 {/* Vehicle + Customer */}
@@ -242,7 +245,7 @@ export default function RecordPickup() {
                         disabled={saving}
                     >
 
-                        Record Pickup
+                        Record Return
 
                     </button>
 

@@ -14,7 +14,9 @@ import {
     IconX,
     IconPencil,
     IconTruckDelivery,
-    IconCircleCheck
+    IconCircleCheck,
+    IconKeyFilled,
+    IconReportAnalytics
 } from "@tabler/icons-react";
 
 export default function BookingCard({
@@ -67,18 +69,19 @@ export default function BookingCard({
 
     const cancelBooking = async () => {
 
-        const confirmCancel = window.confirm( `Cancel Booking #${booking.bookingId}?`);
+        const confirmCancel = window.confirm(`Cancel Booking #${booking.bookingId}?`);
 
         if (!confirmCancel) return;
 
         try {
-            await axios.put( `http://localhost:8080/api/booking/cancel/${booking.bookingId}`, {}, headerBody );
+            await axios.put(`http://localhost:8080/api/booking/cancel/${booking.bookingId}`, {}, headerBody);
             toast.success("Booking Cancelled");
             if (refreshBookings) {
                 refreshBookings();
             }
         }
-        catch (err) { toast.error( err?.response?.data?.message || "Unable to cancel booking.");
+        catch (err) {
+            toast.error(err?.response?.data?.message || "Unable to cancel booking.");
         }
     }
 
@@ -91,13 +94,13 @@ export default function BookingCard({
             if (refreshBookings) {
                 refreshBookings();
             }
-        } 
-        catch (err) { toast.error( err?.response?.data?.message || "Unable to mark no show" )}
+        }
+        catch (err) { toast.error(err?.response?.data?.message || "Unable to mark no show") }
     }
 
     const renderButtons = () => {
 
-        if ( isCustomer && booking.bookingStatus === "BOOKED") {
+        if (isCustomer && booking.bookingStatus === "BOOKED") {
             return (
                 <>
                     <button className="btn btn-outline-primary" onClick={viewPage}>
@@ -109,9 +112,10 @@ export default function BookingCard({
                         Cancel
                     </button>
                 </>
-            )}
+            )
+        }
 
-        if ( isEmployee && booking.bookingStatus === "BOOKED") {
+        if (isEmployee && booking.bookingStatus === "BOOKED") {
             return (
                 <>
                     <button className="btn btn-outline-primary" onClick={viewPage}>
@@ -122,40 +126,57 @@ export default function BookingCard({
                         <IconPencil size={18} className="me-1" />
                         Mark No Show
                     </button>
+                    <button className="btn btn-primary" onClick={() => navigate(`${booking.bookingId}/pickup`)}>
+                        <IconKeyFilled size={18} className="mb-2" /> &nbsp;
+                        Record Pickup
+                    </button>
                 </>
-            )}
+            )
+        }
 
-        if ( isEmployee && booking.bookingStatus === "ACTIVE") {
-            return (
-
-                <button className="btn btn-success">
-                    <IconTruckDelivery size={18} className="me-1"/>
-                    Return Vehicle
-                 </button>
-            )}
-
-        if ((isManager || isAdmin) && booking.bookingStatus === "RETURNED") {
+        if (isEmployee && booking.bookingStatus === "ACTIVE") {
             return (
                 <>
-                    <button className="btn btn-success">
-                        <IconCircleCheck size={18} className="me-1"/>
-                        Booking Completed
-                    </button>
-
                     <button className="btn btn-outline-primary" onClick={viewPage}>
                         <IconEye size={18} className="me-1" />
                         View
                     </button>
+
+                    <button className="btn btn-success" onClick={() => navigate(`${booking.bookingId}/return`)}>
+                        <IconTruckDelivery size={18} className="me-1" />
+                        Return Vehicle
+                    </button>
                 </>
-            )}
+            )
+        }
+
+        if (booking.bookingStatus === "RETURNED" || booking.bookingStatus === "COMPLETED") {
+            return (
+                <>
+                    <button className="btn btn-outline-primary" onClick={viewPage}>
+                        <IconEye size={18} className="me-1" />
+                        View
+                    </button>
+
+                    <button className="btn text-dark"style={{ backgroundColor: '#e2d9f3'}}
+                        onClick={() => navigate(`${booking.bookingId}/summary`)}
+                    >
+                        <IconReportAnalytics size={18} className="me-1" />
+                        Booking Summary
+                    </button>
+
+                </>
+            )
+        }
 
         return (
             <button className="btn btn-outline-primary" onClick={viewPage}>
-                <IconEye size={18}className="me-1"/>
+                <IconEye size={18} className="me-1" />
                 View
             </button>
 
-        )}
+        )
+    }
 
 
 
@@ -180,14 +201,14 @@ export default function BookingCard({
                 {/* Vehicle */}
                 <div className="border rounded-4 p-3 mb-4">
                     <div className="d-flex align-items-center">
-                        <div className="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3"style={{width: 55,height: 55}}>
-                            <IconCar className="text-primary"size={28}/>
+                        <div className="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: 55, height: 55 }}>
+                            <IconCar className="text-primary" size={28} />
                         </div>
 
                         <div className="flex-grow-1">
                             <div className="fw-bold">{booking.vehicle.model}</div>
                             <small className="text-muted">
-                                Rate : {" "} ₹{booking.bookedRate} {" / "} {booking.bookingType === "DAILY" ? "Day": "Hour"}
+                                Rate : {" "} ₹{booking.bookedRate} {" / "} {booking.bookingType === "DAILY" ? "Day" : "Hour"}
                             </small>
                         </div>
 
@@ -200,14 +221,14 @@ export default function BookingCard({
 
                 {/* Pickup */}
                 <div className="d-flex mb-4">
-                    <IconMapPin className="text-success me-3 mt-1" size={20}/>
+                    <IconMapPin className="text-success me-3 mt-1" size={20} />
                     <div>
                         <div className="fw-semibold">Pickup</div>
                         <div>{booking.pickupBranch.name}</div>
                         <small className="text-muted">{booking.pickupBranch.city}</small>
                         <br />
                         <small className="text-muted">
-                            <IconCalendarEvent size={14} className="me-1"/>
+                            <IconCalendarEvent size={14} className="me-1" />
                             {formatDate(booking.plannedPickup)}
                         </small>
                     </div>
@@ -215,7 +236,7 @@ export default function BookingCard({
 
                 {/* Return */}
                 <div className="d-flex mb-4">
-                    <IconMapPin className="text-danger me-3 mt-1" size={20}/>
+                    <IconMapPin className="text-danger me-3 mt-1" size={20} />
                     <div>
                         <div className="fw-semibold">Return </div>
                         <div>{booking.returnBranch.name}</div>
@@ -234,19 +255,19 @@ export default function BookingCard({
                 <div className="row text-center">
 
                     <div className="col-4">
-                        <IconClock className="text-primary mb-2"/>
+                        <IconClock className="text-primary mb-2" />
                         <div className="fw-bold">{booking.duration}</div>
-                        <small className="text-muted">{booking.bookingType === "DAILY"? "Days": "Hours"}</small>
+                        <small className="text-muted">{booking.bookingType === "DAILY" ? "Days" : "Hours"}</small>
                     </div>
 
                     <div className="col-4">
-                        <IconRoute className="text-primary mb-2"/>
+                        <IconRoute className="text-primary mb-2" />
                         <div className="fw-bold">{booking.includedKm}</div>
                         <small className="text-muted">Included KM</small>
                     </div>
 
                     <div className="col-4">
-                        <IconCash className="text-primary mb-2"/>
+                        <IconCash className="text-primary mb-2" />
                         <div className="fw-bold">₹{booking.estimatedCost}</div>
                         <small className="text-muted">Estimate</small>
                     </div>
@@ -255,28 +276,28 @@ export default function BookingCard({
 
                 {/* Add-ons */}
 
-                { booking.bookingAddons.length > 0 && (
+                {booking.bookingAddons.length > 0 && (
 
-                        <>
-                            <hr />
-                            <h6 className="fw-bold mb-3">Selected Add-ons</h6>
+                    <>
+                        <hr />
+                        <h6 className="fw-bold mb-3">Selected Add-ons</h6>
 
-                            { booking.bookingAddons.map((addon, index) => (
+                        {booking.bookingAddons.map((addon, index) => (
 
-                                    <div key={index} className="d-flex justify-content-between align-items-center mb-2">
-                                        <div>
-                                            <span className="fw-semibold">{addon.name}</span>
-                                            <small className="text-muted ms-2"> x {addon.quantity}</small>
-                                        </div>
-                                        <div className="fw-semibold">
-                                            ₹{ (addon.pricePerDay *addon.quantity).toFixed(2) }
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                        </>
+                            <div key={index} className="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <span className="fw-semibold">{addon.name}</span>
+                                    <small className="text-muted ms-2"> x {addon.quantity}</small>
+                                </div>
+                                <div className="fw-semibold">
+                                    ₹{(addon.pricePerDay * addon.quantity).toFixed(2)}
+                                </div>
+                            </div>
+                        ))
+                        }
+                    </>
 
-                    )
+                )
 
                 }
 
@@ -288,12 +309,12 @@ export default function BookingCard({
                     <span className="fw-bold">₹{booking.estimatedCost}</span>
                 </div>
 
-                { booking.finalCost && (
-                        <div className="d-flex justify-content-between align-items-center mb-2">
-                            <span className="text-muted">Final Cost</span>
-                            <span className="fw-bold text-success"> ₹{booking.finalCost}</span>
-                        </div>
-                    )
+                {booking.finalCost && (
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted">Final Cost</span>
+                        <span className="fw-bold text-success"> ₹{booking.finalCost}</span>
+                    </div>
+                )
                 }
 
                 <hr />

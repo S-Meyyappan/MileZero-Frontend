@@ -8,7 +8,8 @@ import {
     IconReceipt2,
     IconCar,
     IconKey,
-    IconKeyFilled
+    IconKeyFilled,
+    IconReportAnalytics
 } from "@tabler/icons-react";
 
 export default function BookingActionCard({
@@ -138,7 +139,7 @@ export default function BookingActionCard({
                                     Mark No Show
                                 </button>
                                 <div className="m-3"></div>
-                                <button className="btn btn-success w-100" onClick={onRecordPickup} disabled={loading}>
+                                <button className="btn btn-primary w-100" onClick={onRecordPickup} disabled={loading}>
                                     <IconKeyFilled size={18} className="mb-2" /> &nbsp;
                                     Record Pickup
                                 </button>
@@ -174,46 +175,43 @@ export default function BookingActionCard({
 
                     {
 
-                        (isManager || isAdmin) &&
-                        booking.bookingStatus === "RETURNED" && (
+                        booking.bookingStatus === "RETURNED" || booking.bookingStatus === "COMPLETED" && (
+                            <>
 
-                            <button
-                                className="btn btn-success w-100"
-                                onClick={onCompleteBooking}
-                            >
+                                <button
+                                    className="btn btn-info w-100"
+                                    onClick={onCompleteBooking}
+                                >
 
-                                <IconCircleCheck
-                                    size={18}
-                                    className="me-2"
-                                />
+                                    <IconCircleCheck
+                                        size={18}
+                                        className="me-2"
+                                    />
 
-                                Complete Booking
+                                    Complete Booking
 
-                            </button>
+                                </button>
 
-                        )
 
-                    }
 
-                    <hr />
+                                <hr />
 
-                    <div className="d-grid">
+                                <div className="d-grid">
 
-                        <button
-                            className="btn btn-outline-secondary"
-                            onClick={onDownloadInvoice}
-                        >
+                                    <button className="btn text-dark w-100" style={{ backgroundColor: '#e2d9f3' }}
+                                        onClick={() => navigate(`${booking.bookingId}/summary`)}
+                                    >
+                                        <IconReportAnalytics size={18} className="me-1" />
+                                        Booking Summary
+                                    </button>
 
-                            <IconDownload
-                                size={18}
-                                className="me-2"
-                            />
+                                </div>
 
-                            Download Receipt
+                            </>
 
-                        </button>
+                        )}
 
-                    </div>
+
 
                     <div className="alert alert-light border mt-4 mb-0">
 

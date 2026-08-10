@@ -195,7 +195,7 @@ export default function MyBookingDetails() {
                                 onCancel={cancelBooking}
                                 onEdit={changeBookingStatus}
                                 onRecordPickup={() => {navigate("pickup")}}
-                                onReturnVehicle={() => { }}
+                                onReturnVehicle={() => {navigate("return")}}
                                 onCompleteBooking={() => { }}
                                 onDownloadInvoice={() => { }}
                             />

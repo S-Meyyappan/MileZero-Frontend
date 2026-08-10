@@ -55,7 +55,7 @@ export default function BookingHeader({ booking }) {
 
                 <button
                     className="btn btn-outline-secondary mb-4"
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate(`/dashboard/my-bookings`)}
                 >
                     <IconArrowLeft
                         size={18}

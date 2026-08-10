@@ -3,7 +3,8 @@ import {
     IconPhone,
     IconCreditCard,
     IconCalendarEvent,
-    IconShieldCheck
+    IconShieldCheck,
+    IconPhoto
 } from "@tabler/icons-react";
 
 export default function BookingCustomerCard({ customer }) {
@@ -140,6 +141,32 @@ export default function BookingCustomerCard({ customer }) {
 
                     }
 
+                </div>
+
+                <div className="row g-4 mt-2">
+                    { customer.licensePhoto ? (
+
+                        <div className="border rounded-4 p-3 mb-3 text-center">
+                            <img
+                                src={`/customer/${customer.licensePhoto}`}
+                                alt="Driving Licence"
+                                className="img-fluid rounded"
+                                style={{
+                                    maxHeight: "280px"
+                                }}
+                            />
+                        </div>
+
+                    ) : (
+
+                        <div className="border rounded-4 p-5 text-center text-muted mb-3">
+                            <IconPhoto size={55} className="mb-3"/>
+                            <div> No driving licence uploaded</div>
+                        </div>
+
+                    )
+
+                }
                 </div>
 
             </div>
