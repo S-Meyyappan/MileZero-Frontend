@@ -37,6 +37,8 @@ export default function MyVehicleDetails() {
 
     const [image, setImage] = useState(null)
 
+    const [imageVersion, setImageVersion] = useState(Date.now())
+
     const [loading, setLoading] = useState(true)
 
     const [saving, setSaving] = useState(false)
@@ -166,9 +168,11 @@ export default function MyVehicleDetails() {
 
             toast.success("Vehicle updated successfully")
 
-            loadVehicle()
+            await loadVehicle()
 
             setImage(null)
+
+            setImageVersion(Date.now())
 
             setIsEditing(false)
 
@@ -223,7 +227,6 @@ export default function MyVehicleDetails() {
                 <VehicleDetailsHeader
                     vehicle={vehicle}
                     isEditing={isEditing}
-                    canEdit={canEdit}
                     onEdit={() => setIsEditing(true)}
                     onCancel={handleCancel}
                     onSave={handleSave}
@@ -248,7 +251,7 @@ export default function MyVehicleDetails() {
 
                     <div className="col-lg-5">
                         <VehicleImageCard
-                            imageUrl={`/vehicle/${vehicle.image}`}
+                            imageUrl={`/vehicle/${vehicle.image}?v=${imageVersion}`}
                             image={image}
                             onImageChange={setImage}
                             disabled={!isEditing}

@@ -33,6 +33,14 @@ import MyVehicleDetails from './pages/Employee/MyVehiclesDetails';
 import Dashboard from './pages/Dashboard';
 import AuthenticateUser from './pages/AuthenticateUser';
 import AddVehicle from './pages/Employee/AddVehicle';
+import EmployeeList from './pages/Admin/EmployeeList';
+import EmployeeAdd from './pages/Admin/EmployeeAdd';
+import CategoryList from './pages/Admin/CategoryList';
+import CategoryAdd from './pages/Admin/CategoriesAdd';
+import CustomerList from './pages/Admin/CustomerList';
+import BranchList from './pages/Admin/BranchList';
+import BranchAdd from './pages/Admin/BranchAdd';
+import VehicleList from './pages/Admin/VehiclesList';
 
 function App() {
 
@@ -88,6 +96,16 @@ function App() {
           <Route path="my-vehicles" element={<MyVehicles />}/>
           <Route path="my-vehicles/:vehicleId" element={<MyVehicleDetails />}/>
           <Route path="my-vehicles/add" element={<AddVehicle />} />
+
+          <Route path="employees" element={<EmployeeList />} />
+          <Route path="employees/add" element={<EmployeeAdd />} />
+          <Route path="categories" element={<CategoryList />} />
+          <Route path="categories/add" element={<CategoryAdd />} />
+          <Route path="branches" element={<BranchList />} />
+          <Route path="branches/add" element={<BranchAdd />} />
+          <Route path="admin-vehicles" element={<VehicleList />} />
+          <Route path="admin-vehicles/add" element={<AddVehicle />} />
+          <Route path="customers" element={<CustomerList />} />
             </Route>
         </Route>
 
