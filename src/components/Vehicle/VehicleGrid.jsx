@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router";
 import VehicleCard from "./VehicleCard";
 
 function VehicleGrid({ vehicles }) {
+
+    const navigate = useNavigate()
 
     return (
 
@@ -33,7 +36,10 @@ function VehicleGrid({ vehicles }) {
                             {
                                 vehicles.map(vehicle => (
                                     <div key={vehicle.id} className="col-xl-4 col-lg-4 col-md-6">
-                                        <VehicleCard vehicle={vehicle}/>
+                                        <VehicleCard 
+                                            vehicle={vehicle}
+                                            onClick={() => navigate(`/vehicle-details/${vehicle?.id}`)}
+                                            />
                                     </div>
                                 ))
                             }

@@ -1,7 +1,9 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import VehicleCard from "../Vehicle/VehicleCard";
 
 function FeaturedVehicles({ vehicles }) {
+
+    const navigate = useNavigate()
 
     return (
 
@@ -53,6 +55,7 @@ function FeaturedVehicles({ vehicles }) {
 
                             <VehicleCard
                                 vehicle={vehicle}
+                                onClick={() => navigate(`/vehicle-details/${vehicle?.id}`)}
                             />
 
                         </div>
