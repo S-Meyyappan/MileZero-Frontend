@@ -4,7 +4,7 @@ const initialState = {
 
 export const AddonReducer = (state=initialState, action) => {
         switch (action.type) {
-        case 'GET_ALL':
+        case 'ADDON/GET_ALL':
             return {
                 ...state,
                 list: action.payload
