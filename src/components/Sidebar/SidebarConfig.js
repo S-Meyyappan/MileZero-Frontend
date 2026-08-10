@@ -21,15 +21,15 @@ const sidebarConfig = {
     CUSTOMER: [
 
         {
+            title: "Dashboard",
+            icon: IconLayoutDashboard,
+            path: "/dashboard"
+        },
+        
+        {
             title: "Home",
             icon: IconHome,
             path: "/"
-        },
-
-        {
-            title: "Dashboard",
-            icon: IconLayoutDashboard,
-            path: "home"
         },
 
         {
@@ -51,7 +51,7 @@ const sidebarConfig = {
         {
             title: "Dashboard",
             icon: IconLayoutDashboard,
-            path: "/employee"
+            path: "/dashboard"
         },
 
         {
@@ -82,26 +82,7 @@ const sidebarConfig = {
         {
             title: "Vehicles",
             icon: IconCar,
-
-            children: [
-
-                {
-                    title: "View Vehicles",
-                    path: "/vehicles"
-                },
-
-                {
-                    title: "Add Vehicle",
-                    path: "/vehicles/new"
-                },
-
-                {
-                    title: "Edit Vehicle",
-                    path: "/vehicles/edit"
-                }
-
-            ]
-
+            path: "my-vehicles"
         },
 
         {
@@ -117,18 +98,18 @@ const sidebarConfig = {
         {
             title: "Dashboard",
             icon: IconLayoutDashboard,
-            path: "/manager"
+            path: "/dashboard"
+        },
+
+        {
+            title: "Vehicles",
+            icon: IconCar,
+            path: "my-vehicles"
         },
 
         {
             title: "Branch",
             icon: IconBuilding,
-            path: "/manager/branch"
-        },
-
-        {
-            title: "Bookings",
-            icon: IconCalendarEvent,
             path: "my-bookings"
         },
 
