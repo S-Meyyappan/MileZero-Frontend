@@ -153,7 +153,6 @@ export default function AddVehicle() {
                 <VehicleDetailsHeader
                     vehicle={null}
                     isEditing={true}
-                    canEdit={true}
                     isCreate={true}
                     onEdit={() => { }}
                     onCancel={handleCancel}

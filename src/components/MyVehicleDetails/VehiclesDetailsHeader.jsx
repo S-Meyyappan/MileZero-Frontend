@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 export default function VehicleDetailsHeader({
     vehicle,
     isEditing,
-    isCreate,
+    isCreate = false,
     onEdit,
     onCancel,
     onSave,
@@ -22,7 +22,7 @@ export default function VehicleDetailsHeader({
 
     const auth = useSelector(state => state.auth)
     
-    const canEdit = isCreate ? true : auth?.form?.role === "MANAGER" || auth?.fom?.role === "ADMIN";
+    const canEdit = isCreate ? true : (auth?.form?.role === "MANAGER" || auth?.form?.role === "ADMIN");
 
     return (
 

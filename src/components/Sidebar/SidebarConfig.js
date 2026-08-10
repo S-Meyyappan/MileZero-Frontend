@@ -25,7 +25,7 @@ const sidebarConfig = {
             icon: IconLayoutDashboard,
             path: "/dashboard"
         },
-        
+
         {
             title: "Home",
             icon: IconHome,
@@ -113,83 +113,38 @@ const sidebarConfig = {
             path: "my-bookings"
         },
 
-        {
-            title: "Reports",
-            icon: IconChartBar,
-            path: "/manager/reports"
-        },
-
-        {
-            title: "Branch Settings",
-            icon: IconSettings,
-            path: "/manager/settings"
-        }
-
     ],
 
     ADMIN: [
 
         {
-            title: "Dashboard",
-            icon: IconLayoutDashboard,
-            path: "/admin"
-        },
-
-        {
             title: "Fleet",
             icon: IconCar,
-
-            children: [
-
-                {
-                    title: "Vehicles",
-                    path: "/admin/vehicles"
-                },
-
-                {
-                    title: "Categories",
-                    icon: IconCategory,
-                    path: "/admin/categories"
-                },
-
-                {
-                    title: "Pricing",
-                    icon: IconCurrencyRupee,
-                    path: "/admin/pricing"
-                }
-
-            ]
-
+            path: "admin-vehicles"
         },
 
         {
             title: "Branches",
             icon: IconBuilding,
-            path: "/admin/branches"
+            path: "branches"
         },
 
         {
             title: "Employees",
             icon: IconUsers,
-            path: "/admin/employees"
+            path: "employees"
         },
 
         {
             title: "Customers",
             icon: IconUserStar,
-            path: "/admin/customers"
-        },
-
-        {
-            title: "Reports",
-            icon: IconChartBar,
-            path: "/admin/reports"
+            path: "customers"
         },
 
         {
             title: "Settings",
             icon: IconSettings,
-            path: "/admin/settings"
+            path: "categories"
         }
 
     ]
