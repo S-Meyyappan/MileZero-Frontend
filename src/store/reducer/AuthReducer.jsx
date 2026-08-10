@@ -35,7 +35,7 @@ export const AuthReducer = (state = initialState, action) => {
             return {
                 ...state,
                 initialized: true,
-                form: initialState
+                form: initialState.form
             }
         case "AUTH/RESTORE":
             return {
@@ -49,7 +49,8 @@ export const AuthReducer = (state = initialState, action) => {
         case "AUTH/NO_SESSION":
             return {
                 ...state,
-                initialized: true
+                initialized: true,
+                form: initialState.form
             };
         default:
             return state

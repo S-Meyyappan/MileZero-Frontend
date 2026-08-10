@@ -21,19 +21,25 @@ import Booking from './pages/Booking';
 import VehicleSearch from './pages/AvailableVehicle';
 import AvailableVehicle from './pages/AvailableVehicle';
 import AuthPage from './pages/AuthPage';
-import ProtectedRoute from './pages/ProtectedRoute';
 import BookingReview from './pages/BookingReview';
 import MyBookings from './pages/MyBookings';
 import MyBookingDetails from './pages/MyBookingDetails';
 import CustomerProfile from './pages/Customer/CustomerProfile';
 import RecordPickup from './pages/Employee/RecordPickup';
+import RecordReturn from './pages/Employee/RecordReturn';
+import CompleteBookingSummary from './pages/Employee/CompleteBookingSummary';
+import MyVehicles from './pages/Employee/MyVehicles';
+import MyVehicleDetails from './pages/Employee/MyVehiclesDetails';
+import Dashboard from './pages/Dashboard';
+import AuthenticateUser from './pages/AuthenticateUser';
+import AddVehicle from './pages/Employee/AddVehicle';
 
 function App() {
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const auth = loadAuth();
+    const auth = loadAuth()
 
     if (auth.token) {
       dispatch({
@@ -67,12 +73,21 @@ function App() {
 
         {/* Dashboard */}
 
-        <Route element={<ProtectedRoute />}>
+        <Route element={<AuthenticateUser />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
+
+          <Route index element={<Dashboard />} />
+
           <Route path="my-bookings" element={<MyBookings />}/>
           <Route path="my-bookings/:bookingId" element={<MyBookingDetails />}/>
           <Route path="customer-profile" element={<CustomerProfile />}/>
           <Route path="my-bookings/:bookingId/pickup" element={<RecordPickup />}/>
+          <Route path="my-bookings/:bookingId/return" element={<RecordReturn />}/>
+          <Route path="my-bookings/:bookingId/summary" element={<CompleteBookingSummary />}/>
+
+          <Route path="my-vehicles" element={<MyVehicles />}/>
+          <Route path="my-vehicles/:vehicleId" element={<MyVehicleDetails />}/>
+          <Route path="my-vehicles/add" element={<AddVehicle />} />
             </Route>
         </Route>
 
