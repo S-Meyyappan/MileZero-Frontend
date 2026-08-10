@@ -58,7 +58,7 @@ function DashboardLayout() {
                             {/* Left */}
                             <div>
                                 <h3 className="display-sm mb-1">Dashboard</h3>
-                                <div className="text-body-secondary">Welcome back {auth.username} 👋</div>
+                                <div className="text-body-secondary">Welcome back !</div>
                             </div>
 
                             {/* Right */}
