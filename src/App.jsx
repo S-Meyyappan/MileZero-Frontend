@@ -68,11 +68,11 @@ function App() {
 
         {/* Public */}
         <Route element={<MainLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/vehicles" element={<Vehicles />} />
-            <Route path="/available-vehicle" element={<AvailableVehicle />} />
-            <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
-            <Route path="/booking/:vehicleId" element={<Booking />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/vehicles" element={<Vehicles />} />
+          <Route path="/available-vehicle" element={<AvailableVehicle />} />
+          <Route path="/vehicle-details/:vehicleId" element={<VehicleDetails />} />
+          <Route path="/booking/:vehicleId" element={<Booking />} />
         </Route>
 
         <Route path="/review-booking" element={<BookingReview />} />
@@ -81,32 +81,43 @@ function App() {
 
         {/* Dashboard */}
 
-        <Route element={<AuthenticateUser />}>
+        <Route element={<AuthenticateUser allowedRoles={["ADMIN", "EMPLOYEE", "MANAGER", "CUSTOMER"]} />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+          </Route>
+        </Route>
 
-          <Route index element={<Dashboard />} />
+        <Route element={<AuthenticateUser allowedRoles={["CUSTOMER"]} />}>
+          <Route path="/dashboard">
+            <Route path="my-bookings" element={<MyBookings />} />
+            <Route path="my-bookings/:bookingId" element={<MyBookingDetails />} />
+            <Route path="customer-profile" element={<CustomerProfile />} />
+          </Route>
+        </Route>
 
-          <Route path="my-bookings" element={<MyBookings />}/>
-          <Route path="my-bookings/:bookingId" element={<MyBookingDetails />}/>
-          <Route path="customer-profile" element={<CustomerProfile />}/>
-          <Route path="my-bookings/:bookingId/pickup" element={<RecordPickup />}/>
-          <Route path="my-bookings/:bookingId/return" element={<RecordReturn />}/>
-          <Route path="my-bookings/:bookingId/summary" element={<CompleteBookingSummary />}/>
+        <Route element={<AuthenticateUser allowedRoles={["EMPLOYEE", "MANAGER"]} />}>
+          <Route path="/dashboard">
+            <Route path="my-bookings/:bookingId/pickup" element={<RecordPickup />} />
+            <Route path="my-bookings/:bookingId/return" element={<RecordReturn />} />
+            <Route path="my-bookings/:bookingId/summary" element={<CompleteBookingSummary />} />
+            <Route path="my-vehicles" element={<MyVehicles />} />
+            <Route path="my-vehicles/:vehicleId" element={<MyVehicleDetails />} />
+            <Route path="my-vehicles/add" element={<AddVehicle />} />
+          </Route>
+        </Route>
 
-          <Route path="my-vehicles" element={<MyVehicles />}/>
-          <Route path="my-vehicles/:vehicleId" element={<MyVehicleDetails />}/>
-          <Route path="my-vehicles/add" element={<AddVehicle />} />
-
-          <Route path="employees" element={<EmployeeList />} />
-          <Route path="employees/add" element={<EmployeeAdd />} />
-          <Route path="categories" element={<CategoryList />} />
-          <Route path="categories/add" element={<CategoryAdd />} />
-          <Route path="branches" element={<BranchList />} />
-          <Route path="branches/add" element={<BranchAdd />} />
-          <Route path="admin-vehicles" element={<VehicleList />} />
-          <Route path="admin-vehicles/add" element={<AddVehicle />} />
-          <Route path="customers" element={<CustomerList />} />
-            </Route>
+        <Route element={<AuthenticateUser allowedRoles={["ADMIN"]} />}>
+          <Route path="/dashboard">
+            <Route path="employees" element={<EmployeeList />} />
+            <Route path="employees/add" element={<EmployeeAdd />} />
+            <Route path="categories" element={<CategoryList />} />
+            <Route path="categories/add" element={<CategoryAdd />} />
+            <Route path="branches" element={<BranchList />} />
+            <Route path="branches/add" element={<BranchAdd />} />
+            <Route path="admin-vehicles" element={<VehicleList />} />
+            <Route path="admin-vehicles/add" element={<AddVehicle />} />
+            <Route path="customers" element={<CustomerList />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<PageNotFound />} />

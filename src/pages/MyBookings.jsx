@@ -66,9 +66,6 @@ export default function MyBookings() {
                 case "MANAGER":
                     endpoint = "http://localhost:8080/api/booking/get-by-branch/me";
                     break;
-                case "ADMIN":
-                    endpoint = "http://localhost:8080/api/booking/get-by-branch/me";
-                    break;
                 default:
                     return;
             }

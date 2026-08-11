@@ -1,54 +1,71 @@
 import { Navigate, Outlet } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
 import { logoutUser } from "../store/actions/AuthActions";
+import { checkUser } from "../utils/checkUser";
 
-function AuthenticateUser() {
+function AuthenticateUser({ allowedRoles = [] }) {
 
-    const auth = useSelector(state => state.auth)
-
+    const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
+
+    const [checking, setChecking] = useState(true);
+    const [authorized, setAuthorized] = useState(false);
 
     useEffect(() => {
 
-        const verifyUser = async () => {
+        if (!auth.initialized) {
+            return;
+        }
 
-            if (!auth.form.token) { return }
+        const verify = async () => {
+
+            if (!auth.form.token) {
+                setChecking(false);
+                return;
+            }
 
             try {
 
-                const response = await axios.get( "http://localhost:8080/api/auth/check-user",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${auth.form.token}`
-                        }
-                    }
-                )
+                const result = await checkUser(auth.form.token,allowedRoles);
 
-                const { username, role } = response.data;
-
-                if ( username !== auth.form.username || role !== auth.form.role) {
+                if (!result.authenticated) {
                     dispatch(logoutUser());
+                    return;
                 }
+
+                if (!result.authorized) {
+                    setAuthorized(false);
+                    setChecking(false);
+                    return;
+                }
+
+                setAuthorized(true);
+                setChecking(false);
 
             } catch (error) {
 
-                if (error.response?.status === 401) {
-                    dispatch(logoutUser());
-                } 
-                else {
-                    toast.error( error.response?.data?.message || "Unable to authenticate user")
-                }
+                toast.error(
+                    error.response?.data?.message ||
+                    "Unable to authenticate user"
+                );
+
+                setChecking(false);
             }
-        }
+        };
 
-        verifyUser();
+        verify();
 
-    }, [auth.form.token, auth.form.username, auth.form.role, dispatch]);
+    }, [
+        auth.initialized,
+        auth.form.token,
+        dispatch,
+        allowedRoles
+    ]);
 
-
+    // Redux is restoring localStorage
     if (!auth.initialized) {
         return (
             <div className="d-flex justify-content-center align-items-center vh-100">
@@ -57,8 +74,23 @@ function AuthenticateUser() {
         );
     }
 
+    // No token
     if (!auth.form.token) {
         return <Navigate to="/auth" replace />;
+    }
+
+    // Backend is checking token/role
+    if (checking) {
+        return (
+            <div className="d-flex justify-content-center align-items-center vh-100">
+                <div className="spinner-border text-primary" />
+            </div>
+        );
+    }
+
+    // Logged in but not allowed
+    if (!authorized) {
+        return <Navigate to="/404" replace />;
     }
 
     return <Outlet />;
