@@ -19,6 +19,7 @@ export default function BranchList() {
     const navigate = useNavigate();
 
     const [branches, setBranches] = useState([]);
+    
     const [editingId, setEditingId] = useState(null);
 
     const [editForm, setEditForm] = useState({

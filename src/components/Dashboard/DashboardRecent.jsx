@@ -2,6 +2,7 @@ import {
     IconArrowRight,
     IconCalendarEvent,
     IconCircleCheck,
+    IconCar
 } from "@tabler/icons-react";
 import { useNavigate } from "react-router";
 

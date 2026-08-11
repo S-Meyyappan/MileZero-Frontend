@@ -31,8 +31,7 @@ export default function BookingCard({
     const role = auth.role;
 
     const isCustomer = role === "CUSTOMER"
-    const isEmployee = role === "EMPLOYEE"
-    const isManager = role === "MANAGER"
+    const isEmployee = role === "EMPLOYEE" || role === "MANAGER"
     const isAdmin = role === "ADMIN"
 
     const formatDate = (date) => {

@@ -85,7 +85,7 @@ function VehicleCard({
 
             {/* Image */}
             <div className="vehicle-image-wrapper">
-                <img src={`/vehicle/${vehicle.image}`} alt={vehicle?.model} className="vehicle-image" />
+                <img src={`/vehicle/${vehicle?.image}`} alt={vehicle?.model} className="vehicle-image" />
             </div>
 
             {/* Details */}

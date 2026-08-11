@@ -1,8 +1,8 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import axios from "axios";
-import { toast } from "react-hot-toast";
+import { useState } from "react"
+import { useNavigate } from "react-router"
+import axios from "axios"
+import { toast } from "react-hot-toast"
 import {
     IconArrowLeft,
     IconBuildingStore,
@@ -10,75 +10,75 @@ import {
     IconMap,
     IconPhone,
     IconPlus,
-} from "@tabler/icons-react";
+} from "@tabler/icons-react"
 
 export default function BranchAdd() {
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const [form, setForm] = useState({
         name: "",
         city: "",
         address: "",
         phone: "",
-    });
+    })
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const handleChange = (e) => {
 
-        const { name, value } = e.target;
+        const { name, value } = e.target
 
         setForm((prev) => ({
             ...prev,
             [name]: value,
-        }));
-    };
+        }))
+    }
 
     const handlePhoneChange = (e) => {
 
-        const value = e.target.value;
+        const value = e.target.value
 
         // Only digits
         if (!/^\d*$/.test(value)) {
-            return;
+            return
         }
 
         // Maximum 10 digits
         if (value.length > 10) {
-            return;
+            return
         }
 
         setForm((prev) => ({
             ...prev,
             phone: value,
-        }));
-    };
+        }))
+    }
 
     const handleSubmit = async (e) => {
 
-        e.preventDefault();
+        e.preventDefault()
 
         if (!form.name.trim()) {
-            toast.error("Branch name cannot be empty");
-            return;
+            toast.error("Branch name cannot be empty")
+            return
         }
 
         if (!form.city.trim()) {
-            toast.error("City cannot be empty");
-            return;
+            toast.error("City cannot be empty")
+            return
         }
 
         if (!form.address.trim()) {
-            toast.error("Address cannot be empty");
-            return;
+            toast.error("Address cannot be empty")
+            return
         }
 
         if (form.phone.length !== 10) {
             toast.error(
                 "Phone number must contain 10 digits"
-            );
-            return;
+            )
+            return
         }
 
         const payload = {
@@ -86,40 +86,24 @@ export default function BranchAdd() {
             city: form.city.trim(),
             address: form.address.trim(),
             phone: form.phone,
-        };
+        }
 
         try {
 
-            setLoading(true);
+            setLoading(true)
 
-            await axios.post(
-                "http://localhost:8080/api/branch/add",
-                payload
-            );
+            await axios.post("http://localhost:8080/api/branch/add",payload)
 
-            toast.success(
-                "Branch added successfully"
-            );
+            toast.success("Branch added successfully")
 
-            navigate(-1);
+            navigate(-1)
 
         } catch (error) {
-
-            console.error(
-                "Branch creation failed:",
-                error
-            );
-
-            toast.error(
-                error.response?.data?.message ||
-                "Unable to add branch"
-            );
-
+            toast.error(error.response?.data?.message ||"Unable to add branch")
         } finally {
-
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     return (
         <div className="container py-4">
@@ -143,10 +127,7 @@ export default function BranchAdd() {
 
                     <div className="d-flex align-items-center gap-2">
 
-                        <IconBuildingStore
-                            size={25}
-                            stroke={1.8}
-                        />
+                        <IconBuildingStore size={25} stroke={1.8}/>
 
                         <h2 className="fw-bold mb-0">
                             Add Branch
@@ -371,5 +352,5 @@ export default function BranchAdd() {
             </div>
 
         </div>
-    );
+    )
 }
