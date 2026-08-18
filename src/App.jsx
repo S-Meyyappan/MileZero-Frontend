@@ -87,16 +87,21 @@ function App() {
           </Route>
         </Route>
 
-        <Route element={<AuthenticateUser allowedRoles={["CUSTOMER"]} />}>
-          <Route path="/dashboard">
+        <Route element={<AuthenticateUser allowedRoles={["CUSTOMER","EMPLOYEE", "MANAGER"]} />}>
+            <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="my-bookings" element={<MyBookings />} />
             <Route path="my-bookings/:bookingId" element={<MyBookingDetails />} />
+          </Route>
+        </Route>
+
+        <Route element={<AuthenticateUser allowedRoles={["CUSTOMER"]} />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="customer-profile" element={<CustomerProfile />} />
           </Route>
         </Route>
 
         <Route element={<AuthenticateUser allowedRoles={["EMPLOYEE", "MANAGER"]} />}>
-          <Route path="/dashboard">
+          <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="my-bookings/:bookingId/pickup" element={<RecordPickup />} />
             <Route path="my-bookings/:bookingId/return" element={<RecordReturn />} />
             <Route path="my-bookings/:bookingId/summary" element={<CompleteBookingSummary />} />
@@ -107,7 +112,7 @@ function App() {
         </Route>
 
         <Route element={<AuthenticateUser allowedRoles={["ADMIN"]} />}>
-          <Route path="/dashboard">
+          <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="employees" element={<EmployeeList />} />
             <Route path="employees/add" element={<EmployeeAdd />} />
             <Route path="categories" element={<CategoryList />} />

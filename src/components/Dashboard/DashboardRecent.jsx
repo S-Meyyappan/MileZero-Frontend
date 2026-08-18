@@ -81,7 +81,7 @@ const DashboardRecent = ({ bookings = [] }) => {
                                 type="button"
                                 className="list-group-item list-group-item-action border-0 px-4 py-3"
                                 onClick={() =>
-                                    navigate(`/bookings/${booking.bookingId}`)
+                                    navigate(`my-bookings/${booking.bookingId}`)
                                 }
                             >
                                 <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">

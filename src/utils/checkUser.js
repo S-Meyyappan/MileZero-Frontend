@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function checkUser(token, allowedRoles = []) {
+export async function  checkUser(token, allowedRoles = []) {
     if (!token) {
         return {
             authenticated: false,
